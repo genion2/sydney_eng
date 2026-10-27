@@ -1,0 +1,1136 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>시드니 여행 영어</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400&amp;display=swap"/>
+<style>/* Hark's design tokens and component styles. Each component's rules follow its @component comment. style-gates: data */
+/* @component foundations */
+:root {
+color-scheme: light dark;
+--text-primary: light-dark(#1d1d1f, #f5f5f7); /* body text */
+--text-secondary: light-dark(#636366, #a1a1a6); /* supporting grey text */
+--text-tertiary: light-dark(#1d1d1f4d, #f5f5f74d); /* hollow dots, faint marks; never body text */
+--text-primary-on: light-dark(#f5f5f7, #1d1d1f); /* text on --fill-primary */
+--text-secondary-on: light-dark(#aeaeb2, #5c5c60); /* grey text on --fill-primary */
+--fill-primary: light-dark(#1d1d1f, #f5f5f7); /* the strong fill: solid chips, the nav, the badge */
+--fill-primary-on: light-dark(#f5f5f7, #1d1d1f); /* the page background */
+--fill-secondary: light-dark(#1d1d1f80, #f5f5f780);
+--fill-tertiary: light-dark(#e8e8ea, #2a2a2d); /* the grey card, panel and row tint */
+--fill-segment: light-dark(#3a3a3c, #e2e2e4); /* the nav's tab track */
+--fill-system-green: #00a665; /* status: done, ready */
+--fill-system-orange: #ff4d00; /* status: now, current */
+--fill-system-red: light-dark(#da2f35, #f1555b); /* status: blocked, error */
+--transparent-primary: light-dark(#1d1d1f4d, #f5f5f74d);
+--stroke-primary: light-dark(#1d1d1f24, #f5f5f724); /* strong hairline */
+--stroke-secondary: light-dark(#1d1d1f12, #f5f5f712); /* faint hairline between rows */
+--stroke-primary-on: light-dark(#f5f5f71a, #1d1d1f1a);
+--stroke-composer: light-dark(#f5f5f780, #1d1d1f80); /* the callout's glass edge */
+--stroke-system-orange: #ff4d0026;
+--hover-wash: light-dark(#1d1d1f0d, #f5f5f70d);
+--hover-wash-primary-on: light-dark(#f9f9fa26, #1d1d1f14);
+/* The hero is light text over a dark photo in both themes. */
+--hero-surface: #161f39;
+--hero-text: #f5f5f7;
+--hero-text-muted: #f5f5f7cc;
+--hero-scrim-strong: rgb(22 31 57 / 0.78);
+--hero-scrim-soft: rgb(22 31 57 / 0.3);
+--hero-scrim-side: rgb(22 31 57 / 0.45);
+--hero-glass: rgb(22 31 57 / 0.42);
+--hero-glass-faint: rgb(22 31 57 / 0.35);
+--hero-glass-stroke: rgb(245 245 247 / 0.28);
+--mat-regular: light-dark(rgb(255 255 255 / 0.56), rgb(29 29 31 / 0.55));
+--mat-thin: light-dark(rgb(255 255 255 / 0.22), rgb(29 29 31 / 0.4));
+--mat-agent: light-dark(rgb(255 255 255 / 0.84), rgb(29 29 31 / 0.66));
+--mat-inverse: color-mix(in srgb, var(--fill-primary) 86%, transparent); /* the nav: dark on light, light on dark */
+--hark-blur: blur(50px) saturate(1.6);
+--hark-shadow: 0 8px 40px #1d1d1f1f;
+--sans: "GT Standard","GT Standard L","Geist", -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+--lh: 1.3; /* every text style is 130% */
+--weight-light: 300;
+--weight-regular: 400;
+--weight-medium: 500;
+--weight-bold: 600;
+--size-caption: 12px; /* the smallest text allowed */
+--size-meta: 13px;
+--size-small: 14px;
+--size-body: 15px;
+--size-prose: 16px;
+--size-heading: 20px;
+--size-figure: clamp(24px, 3vw, 32px);
+--size-title: clamp(26px, 3vw, 32px);
+--size-display: clamp(34px, 5vw, 48px);
+--size-lede: clamp(16px, 1.7vw, 20px);
+--type-caption: var(--weight-regular) var(--size-caption)/var(--lh) var(--sans);
+--type-tag: var(--weight-medium) var(--size-caption)/var(--lh) var(--sans);
+--type-small: var(--weight-regular) var(--size-small)/var(--lh) var(--sans);
+--type-label: var(--weight-medium) var(--size-small)/var(--lh) var(--sans);
+--type-body: var(--weight-regular) var(--size-body)/var(--lh) var(--sans);
+--type-body-strong: var(--weight-medium) var(--size-body)/var(--lh) var(--sans);
+--type-heading: var(--weight-medium) var(--size-heading)/var(--lh) var(--sans);
+--type-lede: var(--weight-medium) var(--size-lede)/var(--lh) var(--sans);
+--type-figure: var(--weight-regular) var(--size-figure)/var(--lh) var(--sans);
+--type-title: var(--weight-regular) var(--size-title)/var(--lh) var(--sans);
+--type-display: var(--weight-medium) var(--size-display)/var(--lh) var(--sans);
+--type-numeral: var(--weight-regular) 48px/1 var(--sans);
+--r-s: 12px;
+--r-m: 16px;
+--r-l: 24px;
+--r-xl: 32px;
+--r-pill: 100px;
+--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+--dur-quick: 160ms;
+--dur-draw: 1400ms;
+--page-max: 1120px;
+--gutter: clamp(16px, 3vw, 32px); /* the page's side padding */
+--tap: 44px; /* the smallest touch target */
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+margin: 0;
+background: var(--fill-primary-on);
+color: var(--text-primary);
+font: var(--type-body);
+-webkit-font-smoothing: antialiased;
+overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+figure { margin-inline: 0; }
+a { color: inherit; }
+b, strong { font-weight: var(--weight-bold); }
+p { margin: 0; text-wrap: pretty; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+small { font-size: max(var(--size-caption), 0.85em); }
+.sub { color: var(--text-secondary); }
+:focus-visible { outline: 2px solid var(--fill-primary); outline-offset: 3px; border-radius: 6px; }
+/* @component page */
+.page {
+max-width: var(--page-max);
+margin: 0 auto;
+padding-inline: var(--gutter);
+padding-block: 12px 40px;
+display: grid;
+grid-template-columns: minmax(0, 1fr);
+gap: 16px;
+}
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; min-width: 0; }
+.glass {
+background: var(--mat-inverse);
+-webkit-backdrop-filter: var(--hark-blur);
+backdrop-filter: var(--hark-blur);
+border: 1px solid var(--stroke-primary-on);
+}
+.nav {
+position: sticky;
+top: calc(env(safe-area-inset-top, 0px) + 12px);
+z-index: 20;
+justify-self: center;
+max-width: 100%;
+display: flex;
+align-items: center;
+gap: 6px;
+padding: 5px;
+border-radius: var(--r-pill);
+box-shadow: var(--hark-shadow);
+}
+.nav :focus-visible { outline-color: var(--fill-primary-on); }
+.seg {
+display: flex;
+min-width: 0;
+overflow-x: auto;
+scrollbar-width: none;
+border-radius: var(--r-pill);
+background: var(--fill-segment);
+}
+.seg::-webkit-scrollbar { display: none; }
+.seg a {
+flex: none;
+padding: 8px 14px;
+border-radius: var(--r-pill);
+font: var(--type-label);
+color: var(--text-secondary-on);
+text-decoration: none;
+white-space: nowrap;
+}
+.seg a:hover { color: var(--text-primary-on); }
+/* The active tab carries its own fill so its text is measured against it. */
+.seg a[aria-current="true"] { background: var(--fill-primary-on); color: var(--text-primary); }
+.theme-btn {
+flex: none;
+width: 36px; height: 36px;
+display: grid;
+place-items: center;
+border: 0;
+border-radius: 50%;
+background: var(--hover-wash-primary-on);
+color: var(--text-primary-on);
+cursor: pointer;
+}
+.theme-btn:hover { box-shadow: inset 0 0 0 100px var(--hover-wash-primary-on); }
+.theme-btn::before { content: ""; width: 14px; height: 14px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px currentColor; background: linear-gradient(to right, light-dark(currentColor, transparent) 50%, light-dark(transparent, currentColor) 50%); }
+@media (max-width: 599px) {
+.seg a { display: flex; align-items: center; min-height: var(--tap); }
+.theme-btn { width: var(--tap); height: var(--tap); }
+}
+/* @component footer */
+.foot {
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
+gap: 16px 24px;
+padding-top: 24px;
+border-top: 1px solid var(--stroke-secondary);
+font-size: var(--size-small);
+color: var(--text-secondary);
+}
+.foot strong { color: var(--text-primary); }
+.foot nav { display: flex; flex-wrap: wrap; gap: 6px; }
+.foot nav a {
+padding: 6px 12px;
+border-radius: var(--r-pill);
+background: var(--fill-tertiary);
+color: var(--text-primary);
+font: var(--type-tag);
+text-decoration: none;
+}
+.foot nav a:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+.badge {
+display: inline-flex;
+align-items: center;
+gap: 10px;
+padding: 12px 16px;
+border-radius: var(--r-xl);
+background: var(--fill-primary);
+color: var(--text-primary-on);
+box-shadow: var(--hark-shadow);
+font: var(--weight-medium) var(--size-body)/1.1 var(--sans);
+text-decoration: none;
+}
+.badge:hover { box-shadow: var(--hark-shadow), inset 0 0 0 100px var(--hover-wash-primary-on); }
+.hark-mark { display: inline-grid; place-items: center; }
+.hark-mark svg { display: block; }
+@media (max-width: 599px) {
+.foot nav a { display: inline-flex; align-items: center; min-height: var(--tap); min-width: var(--tap); }
+.badge { min-height: var(--tap); }
+}
+/* @component chip */
+.chip {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+padding: 4px 10px 4px 8px;
+border-radius: var(--r-pill);
+font: var(--type-tag);
+max-width: 100%;
+background: var(--fill-tertiary);
+color: var(--text-secondary);
+vertical-align: middle;
+}
+.chip::before {
+content: "";
+width: 7px; height: 7px;
+border-radius: 50%;
+flex: none;
+box-shadow: inset 0 0 0 1.5px var(--text-tertiary);
+}
+.chip--solid { background: var(--fill-primary); color: var(--text-primary-on); }
+.chip--solid::before { background: var(--fill-system-green); box-shadow: none; }
+td .chip { white-space: nowrap; }
+/* @component dot */
+.dot {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+margin-top: 4px;
+font: var(--type-tag);
+color: var(--text-primary);
+}
+.dot::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--fill-system-green); }
+tbody th .dot { display: flex; width: fit-content; }
+/* @component pill */
+.pill {
+display: inline-block;
+padding: 1px 8px;
+border-radius: var(--r-pill);
+background: var(--fill-tertiary);
+color: var(--text-secondary);
+font: var(--type-tag);
+white-space: normal;
+vertical-align: 1px;
+}
+/* @component button, link and links */
+.btn {
+display: inline-flex;
+align-items: center;
+gap: 6px;
+min-height: 30px;
+padding: 5px 12px;
+border-radius: var(--r-s);
+background: var(--fill-primary-on);
+color: var(--text-primary);
+border: 1px solid var(--stroke-primary);
+font: var(--type-tag);
+text-decoration: none;
+max-width: 100%;
+transition: box-shadow var(--dur-quick) ease;
+}
+.btn:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+.btn[target="_blank"]::after { content: "\2197"; font-size: 11px; color: var(--text-secondary); }
+.link {
+color: var(--text-primary);
+text-decoration: underline;
+text-decoration-color: var(--stroke-primary);
+text-underline-offset: 3px;
+max-width: 100%;
+overflow-wrap: anywhere;
+}
+.link:hover { text-decoration-color: currentColor; }
+.links { display: flex; flex-wrap: wrap; gap: 8px; }
+@media (pointer: coarse), (max-width: 599px) { .btn { min-height: var(--tap); padding-inline: 14px; } }
+@media (max-width: 599px) {
+.link { display: inline-flex; align-items: center; min-width: var(--tap); min-height: var(--tap); margin: -13px 0; vertical-align: middle; }
+}
+/* @component text and fineprint */
+.prose { display: grid; gap: 12px; max-width: 68ch; font-size: var(--size-prose); }
+.fineprint { font-size: var(--size-small); color: var(--text-secondary); max-width: 70ch; }
+/* @component hero */
+.hero {
+position: relative;
+min-height: clamp(460px, 64vh, 660px);
+border-radius: var(--r-xl);
+overflow: hidden;
+display: flex;
+align-items: flex-end;
+color: var(--hero-text);
+isolation: isolate;
+box-shadow: var(--hark-shadow);
+background: var(--hero-surface);
+}
+/* Without a photo the hero is as tall as its copy, so the callout sits beside the copy instead of over it. */
+.hero:not(:has(.hero__img)) { min-height: 0; background: var(--hero-surface) center / cover no-repeat; }
+.hero:not(:has(.hero__img))::after { background: linear-gradient(to right, var(--hero-scrim-side) 0%, transparent 60%); }
+@media (min-width: 761px) {
+.hero:not(:has(.hero__img)) > .callout { position: static; flex: none; align-self: flex-start; margin: clamp(16px, 2.4vw, 24px) clamp(16px, 2.4vw, 24px) clamp(16px, 2.4vw, 24px) auto; }
+}
+.hero__img {
+position: absolute;
+inset: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+object-position: 40% 60%;
+z-index: -2;
+}
+.hero::after {
+content: "";
+position: absolute;
+inset: 0;
+z-index: -1;
+background:
+linear-gradient(to top, var(--hero-scrim-strong) 0%, var(--hero-scrim-soft) 42%, transparent 66%),
+linear-gradient(to right, var(--hero-scrim-side) 0%, transparent 60%);
+}
+.hero__copy {
+display: grid;
+gap: 14px;
+max-width: 40rem;
+padding: clamp(24px, 4vw, 48px);
+padding-bottom: clamp(28px, 3.4vw, 44px);
+}
+.hero__eyebrow {
+justify-self: start;
+padding: 6px 12px;
+border-radius: var(--r-pill);
+background: var(--hero-glass);
+border: 1px solid var(--hero-glass-stroke);
+-webkit-backdrop-filter: var(--hark-blur);
+backdrop-filter: var(--hark-blur);
+font: var(--type-label);
+}
+.hero h1 { font: var(--type-display); letter-spacing: 0; }
+.hero h1 em { font-style: normal; }
+.hero__sub { font: var(--type-lede); max-width: 34ch; }
+.hero__meta { font-size: var(--size-small); color: var(--hero-text-muted); }
+.hero__credit {
+position: absolute;
+right: clamp(20px, 3vw, 32px);
+bottom: 16px;
+padding: 4px 10px;
+border-radius: var(--r-pill);
+background: var(--hero-glass-faint);
+-webkit-backdrop-filter: var(--hark-blur);
+backdrop-filter: var(--hark-blur);
+font: var(--type-caption);
+color: var(--hero-text-muted);
+}
+.hero > .callout {
+position: absolute;
+top: clamp(16px, 2.4vw, 24px);
+right: clamp(16px, 2.4vw, 24px);
+width: min(320px, calc(100% - 32px));
+}
+@media (max-width: 760px) {
+.hero { flex-direction: column; justify-content: flex-end; align-items: stretch; min-height: 0; }
+.hero__img { object-position: 22% 50%; }
+.hero__copy { padding-top: 260px; padding-bottom: 28px; }
+.hero:not(:has(.hero__img)) .hero__copy { padding-top: clamp(24px, 4vw, 48px); }
+.hero__credit { top: 16px; right: 16px; bottom: auto; }
+.hero > .callout { position: static; width: auto; margin: 0 12px 12px; }
+}
+/* @component callout */
+.callout {
+max-width: 420px;
+display: grid;
+gap: 10px;
+padding: 16px 18px 18px;
+border-radius: var(--r-l);
+background: var(--mat-agent);
+-webkit-backdrop-filter: var(--hark-blur);
+backdrop-filter: var(--hark-blur);
+border: 1px solid var(--stroke-composer);
+box-shadow: var(--hark-shadow);
+color: var(--text-primary);
+font-size: var(--size-small);
+}
+.callout__head { display: flex; align-items: center; gap: 8px; color: var(--text-secondary); font-weight: var(--weight-medium); }
+.callout__head svg { color: var(--text-primary); }
+.callout__lead { font-size: var(--size-body); }
+.callout .fineprint { font-size: var(--size-caption); }
+.callout .btn { justify-self: start; }
+/* @component stats */
+.stats { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); padding-top: 8px; }
+.stat {
+display: grid;
+grid-template-rows: 1fr auto;
+gap: 4px;
+padding: 12px 24px;
+border-left: 1px solid var(--stroke-secondary);
+}
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat__fig { font: var(--type-figure); font-variant-numeric: tabular-nums; }
+.stat__label { font-size: var(--size-small); color: var(--text-secondary); }
+@media (max-width: 760px) {
+.stats { grid-auto-flow: row; grid-template-columns: auto minmax(0, 1fr); column-gap: 12px; padding-top: 0; }
+.stat { grid-column: 1 / -1; grid-template-columns: subgrid; align-items: baseline; gap: 12px; padding: 14px 0; border-left: 0; border-top: 1px solid var(--stroke-secondary); }
+.stat:first-child { border-top: 0; }
+}
+/* @component section */
+.section {
+padding-block: clamp(40px, 6vw, 72px) clamp(16px, 2vw, 24px);
+border-top: 1px solid var(--stroke-secondary);
+scroll-margin-top: calc(env(safe-area-inset-top, 0px) + 72px); /* Clears the sticky .nav: its top offset plus its tallest height, 56px. */
+min-width: 0;
+}
+.section > * + * { margin-top: clamp(20px, 2.4vw, 28px); }
+.section > .head + * { margin-top: 0; }
+.head {
+display: grid;
+grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+gap: 10px 40px;
+align-items: end;
+margin-bottom: clamp(24px, 3vw, 36px);
+}
+.head__eyebrow { grid-column: 1 / -1; font: var(--type-label); color: var(--text-secondary); }
+.head h2 { font: var(--type-title); }
+.head__sub { justify-self: end; font-size: var(--size-body); color: var(--text-secondary); max-width: 44ch; text-align: right; }
+@media (max-width: 900px) { .head { grid-template-columns: 1fr; } .head__sub { justify-self: start; text-align: left; } }
+/* @component table */
+.table-wrap { margin-inline: -12px; padding-inline: 12px; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font: var(--type-small); font-variant-numeric: tabular-nums; }
+caption { text-align: left; font: var(--type-caption); color: var(--text-secondary); padding: 0 0 10px; }
+th, td { text-align: left; vertical-align: top; padding: 12px; border-bottom: 1px solid var(--stroke-secondary); }
+th:first-child, td:first-child { padding-left: 0; }
+th:last-child, td:last-child { padding-right: 0; }
+thead th {
+font: var(--type-tag);
+color: var(--text-secondary);
+border-bottom-color: var(--stroke-primary);
+padding-top: 0;
+padding-bottom: 8px;
+white-space: nowrap;
+}
+tbody th { font-weight: var(--weight-bold); }
+tbody tr:last-child > * { border-bottom: 0; }
+.rowhead { white-space: nowrap; }
+td small, th small { display: block; font: var(--type-caption); color: var(--text-secondary); margin-top: 2px; }
+td.num { font-weight: var(--weight-bold); white-space: nowrap; }
+td.num small { white-space: normal; }
+.muted { color: var(--text-secondary); }
+tr.is-highlight > * { background: var(--fill-tertiary); }
+tr.is-highlight > :first-child { box-shadow: -12px 0 var(--fill-tertiary); }
+tr.is-highlight > :last-child { box-shadow: 12px 0 var(--fill-tertiary); }
+.after-table { margin-top: 20px; padding-inline: 12px; }
+@media (max-width: 599px) {
+.table-wrap table, .table-wrap tbody, .table-wrap tr, .table-wrap th, .table-wrap td { display: block; }
+.table-wrap thead { display: none; }
+.table-wrap caption { display: block; text-align: left; }
+.table-wrap tbody tr { padding: 12px 0; border-bottom: 1px solid var(--stroke-secondary); }
+.table-wrap tbody tr.is-highlight { margin-inline: -12px; padding-inline: 12px; background: var(--fill-tertiary); }
+.table-wrap tbody tr.is-highlight > * { background: none; box-shadow: none; }
+.table-wrap tbody tr > * { border-bottom: 0; padding: 2px 0; }
+.table-wrap tbody td.is-empty { display: none; }
+.table-wrap tbody td[data-label] { display: grid; grid-template-columns: minmax(0, 8em) minmax(0, 1fr); column-gap: 12px; }
+.table-wrap tbody td[data-label]::before { content: attr(data-label) " "; color: var(--text-secondary); font-size: var(--size-caption); }
+.rowhead { white-space: normal; }
+}
+/* @component compare */
+.compare { margin-inline: -12px; overflow-x: auto; scroll-snap-type: x mandatory; }
+.compare table { table-layout: fixed; min-width: calc(var(--compare-cols, 3) * 200px); }
+.compare th, .compare td { scroll-snap-align: start; padding-inline: 12px; }
+.compare thead th { font: var(--type-body-strong); color: var(--text-primary); white-space: normal; padding-top: 0; padding-bottom: 14px; border-bottom-color: var(--stroke-secondary); }
+/* On light tiles a white product backdrop blends into the grey. */
+.compare__media { position: relative; display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; width: 100%; aspect-ratio: 4 / 3; max-height: 240px; margin: 0 0 12px; padding: 16px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+.compare__media img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
+.compare thead th > .chip { display: flex; width: fit-content; margin-top: 8px; }
+.compare:has(.compare__media) thead th:not(:has(.compare__media))::before { content: ""; display: block; width: 100%; aspect-ratio: 4 / 3; max-height: 240px; margin-bottom: 12px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+:root[data-theme="dark"] .compare__media img { mix-blend-mode: normal; border-radius: var(--r-s); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .compare__media img { mix-blend-mode: normal; border-radius: var(--r-s); } }
+/* The header column shrinks to nothing on screen but stays in the table, so screen readers keep each value's row header. */
+.js .compare tbody th[scope="row"], .js .compare thead td:first-child { width: 0; padding: 0; border: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.js .compare td[data-label]::before { content: attr(data-label); content: attr(data-label) / ""; display: block; margin-bottom: 4px; font: var(--type-caption); color: var(--text-secondary); }
+@media (max-width: 599px) { .compare table { min-width: calc(var(--compare-cols, 3) * 68vw); } }
+/* @component steps */
+.step {
+display: grid;
+grid-template-columns: 112px minmax(0, 1fr) minmax(220px, 0.78fr);
+gap: 16px 28px;
+padding: 28px 0;
+border-bottom: 1px solid var(--stroke-secondary);
+}
+.step > * { min-width: 0; }
+.steps > .step:last-child { border-bottom: 0; }
+.step p + p { margin-top: 8px; }
+.step__num { font: var(--type-numeral); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.step__eyebrow { margin-top: 8px; font: var(--type-label); color: var(--text-secondary); }
+.step h3 { font: var(--type-heading); margin-bottom: 12px; }
+.step__pills { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.step__pills li {
+padding: 4px 10px;
+border-radius: var(--r-pill);
+border: 1px solid var(--stroke-primary);
+font-size: var(--size-meta);
+color: var(--text-secondary);
+max-width: 100%;
+}
+.step__pills b { color: var(--text-primary); font-weight: var(--weight-bold); }
+.step__panel {
+align-self: start;
+margin: 0;
+padding: 16px 18px;
+border-radius: var(--r-m);
+background: var(--fill-tertiary);
+font-size: var(--size-small);
+}
+.step__panel dt { font-size: var(--size-caption); color: var(--text-secondary); margin-bottom: 2px; }
+.step__panel dd { margin: 0 0 12px; }
+.step__panel dd:last-child { margin-bottom: 0; }
+.step__panel .fineprint { display: block; margin-top: 6px; font-size: var(--size-caption); }
+.step__panel .btn { margin-top: 8px; }
+.step__figure { grid-column: 2 / span 2; margin: 0; }
+.step__figure img { width: 100%; height: clamp(200px, 26vw, 320px); object-fit: cover; border-radius: var(--r-m); }
+.step__figure figcaption { font-size: var(--size-caption); color: var(--text-secondary); padding-top: 10px; }
+@media (min-width: 901px) {
+.step:not(:has(> .step__panel)) { grid-template-columns: 112px minmax(0, 1fr); }
+.step:not(:has(> .step__panel)) > .step__figure { grid-column: 2; }
+}
+@media (max-width: 900px) {
+.step { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+.step__figure { grid-column: 1; }
+.step__intro { display: flex; align-items: baseline; gap: 14px; }
+.step__num { font-size: 40px; }
+.step__eyebrow { margin-top: 0; }
+}
+/* @component checklist */
+.checklist { display: grid; grid-template-columns: minmax(0, 1.4fr) auto minmax(0, 1fr); column-gap: 20px; list-style: none; margin: 0; padding: 0; }
+.checklist:not(:has(.checklist__note)) { grid-template-columns: minmax(0, 1fr) auto; }
+.checklist > li {
+display: grid;
+grid-column: 1 / -1;
+grid-template-columns: subgrid;
+row-gap: 8px;
+align-items: center;
+padding: 14px 0;
+border-bottom: 1px solid var(--stroke-secondary);
+}
+.checklist > li:last-child { border-bottom: 0; }
+.checklist__item { grid-column: 1; font-weight: var(--weight-bold); }
+.checklist > li > .chip { grid-column: 2; justify-self: start; }
+.checklist:not(:has(.checklist__note)) > li > .chip { justify-self: end; }
+.checklist__item small { display: block; font-weight: var(--weight-regular); font-size: var(--size-caption); color: var(--text-secondary); margin-top: 2px; }
+.checklist__note { grid-column: 3; font-size: var(--size-small); color: var(--text-secondary); }
+.checklist > li.is-done .checklist__item { text-decoration: line-through; text-decoration-color: var(--text-tertiary); }
+@media (max-width: 760px) {
+.checklist { grid-template-columns: minmax(0, 1fr) auto; }
+.checklist > li > .chip { justify-self: end; }
+.checklist__note { grid-column: 1 / -1; }
+}
+/* @component breakdown */
+.breakdown { max-width: 720px; }
+@media (min-width: 901px) { .section > .breakdown, .section > .aside { max-width: calc((100% - 40px) * 1.65 / 2.65); } }
+.breakdown dl { margin: 0; }
+.breakdown .row {
+display: flex;
+align-items: baseline;
+justify-content: space-between;
+gap: 16px;
+padding: 14px 0;
+border-bottom: 1px solid var(--stroke-secondary);
+}
+.breakdown dt { font-size: var(--size-body); }
+.breakdown dt small { display: block; color: var(--text-secondary); font-size: var(--size-meta); margin-top: 2px; }
+.breakdown dd { margin: 0; font-weight: var(--weight-bold); font-size: var(--size-body); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.breakdown .row--total {
+margin-top: -1px;
+padding: 18px 0 0;
+border-top: 1px solid var(--stroke-primary);
+border-bottom: 0;
+flex-wrap: wrap;
+align-items: baseline;
+}
+.breakdown .row--total dt { font: var(--type-body-strong); }
+.breakdown .row--total dd { font: var(--type-figure); white-space: normal; }
+.breakdown .fineprint { margin-top: 16px; }
+/* @component pair */
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); align-items: start; }
+.pair:has(> :is(.callout, .aside):last-child) { grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr); column-gap: 40px; }
+.pair > .callout { max-width: none; }
+@media (max-width: 760px) { .pair, .pair:has(> :is(.callout, .aside):last-child) { grid-template-columns: minmax(0, 1fr); } }
+/* @component timeline */
+.timeline { display: grid; grid-template-columns: 210px minmax(0, 1fr) auto; column-gap: 28px; list-style: none; margin-inline: 0; margin-bottom: 0; padding: 0; }
+.timeline > li {
+display: grid;
+grid-column: 1 / -1;
+grid-template-columns: subgrid;
+row-gap: 8px;
+align-items: start;
+padding: 18px 0;
+border-bottom: 1px solid var(--stroke-secondary);
+}
+.timeline > li:first-child { padding-top: 0; }
+.timeline > li:last-child { border-bottom: 0; padding-bottom: 0; }
+.timeline__when { display: flex; align-items: baseline; gap: 12px; font-weight: var(--weight-bold); }
+.timeline__when::before {
+content: "";
+width: 8px; height: 8px;
+flex: none;
+border-radius: 50%;
+box-shadow: inset 0 0 0 1.5px var(--text-tertiary);
+transform: translateY(-1px);
+}
+.timeline > li.is-current .timeline__when::before { background: var(--fill-system-orange); box-shadow: 0 0 0 4px var(--stroke-system-orange); }
+.timeline > li > p:has(> .chip:only-child) { justify-self: end; }
+.timeline__what ul { margin: 0; padding-left: 18px; }
+.timeline__what li { margin-bottom: 4px; }
+.timeline__what li:last-child { margin-bottom: 0; }
+.timeline__what p + p { margin-top: 6px; }
+@media (max-width: 900px) {
+.timeline { grid-template-columns: minmax(0, 1fr); }
+.timeline > li > p:has(> .chip:only-child) { justify-self: start; }
+.timeline__what, .timeline > li > p:last-child { padding-left: 20px; }
+}
+/* @component cards */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.cards:has(> :nth-child(4):last-child) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.cards > div { padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+.cards h3 { font: var(--type-heading); margin-bottom: 10px; }
+.cards ul { margin: 0; padding: 0; list-style: none; }
+.cards li { padding: 10px 0; border-bottom: 1px solid var(--stroke-secondary); }
+.cards li:last-child { border-bottom: 0; padding-bottom: 0; }
+.cards__media { display: grid; grid-template: minmax(0, 1fr) / minmax(0, 1fr); place-items: center; aspect-ratio: 4 / 3; max-height: 220px; margin: 0 0 14px; padding: 12px; border-radius: var(--r-s); background: var(--fill-primary-on); }
+.cards__media img { max-width: 100%; max-height: 100%; mix-blend-mode: multiply; }
+:root[data-theme="dark"] .cards__media img { mix-blend-mode: normal; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cards__media img { mix-blend-mode: normal; } }
+.cards .quote { font: var(--type-heading); margin-bottom: 8px; text-wrap: balance; }
+@media (max-width: 900px) { .cards { grid-template-columns: 1fr; } }
+@media (max-width: 760px) { .cards:has(> :nth-child(4):last-child) { grid-template-columns: minmax(0, 1fr); } }
+/* @component aside */
+.aside {
+max-width: 62ch;
+padding: 20px 22px;
+border: 1.5px dashed var(--stroke-primary);
+border-radius: var(--r-m);
+}
+.aside h3 { font: var(--type-heading); margin-bottom: 6px; }
+/* @component chart */
+.chart { margin-bottom: 8px; padding: 20px 20px 12px; border-radius: var(--r-m); background: var(--fill-tertiary); overflow-x: auto; }
+.chart__cap { font-size: var(--size-caption); color: var(--text-secondary); margin-bottom: 12px; }
+.chart svg { width: 100%; height: auto; display: block; }
+.pf-grid { stroke: var(--stroke-primary); stroke-width: 1; }
+.pf-line { stroke: var(--fill-primary); stroke-width: 2.4; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.pf-fill { fill: var(--fill-primary); opacity: 0.07; }
+.pf-dot { fill: var(--fill-primary-on); stroke: var(--fill-primary); stroke-width: 2; }
+.pf-alt { fill: var(--text-primary); font: var(--weight-bold) var(--size-body) var(--sans); text-anchor: middle; }
+.pf-name { fill: var(--text-secondary); font: var(--weight-medium) var(--size-meta) var(--sans); text-anchor: middle; }
+.pf-num { fill: var(--text-tertiary); font: var(--weight-medium) var(--size-meta) var(--sans); text-anchor: middle; }
+.pf-axis { fill: var(--text-secondary); font: var(--weight-regular) var(--size-caption) var(--sans); }
+.js .chart:not(.is-in) .pf-line { stroke-dasharray: 1400; stroke-dashoffset: 1400; }
+.js .chart.is-in .pf-line { stroke-dasharray: 1400; stroke-dashoffset: 0; transition: stroke-dashoffset var(--dur-draw) var(--ease-out) 120ms; }
+@media (prefers-reduced-motion: reduce) { .js .chart .pf-line { stroke-dasharray: none; stroke-dashoffset: 0; transition: none; } }
+/* @component figure */
+.band { margin-inline: 0; margin-bottom: 0; }
+.band img { width: 100%; height: clamp(240px, 40vw, 520px); object-fit: cover; border-radius: var(--r-xl); }
+.band figcaption { font-size: var(--size-caption); color: var(--text-secondary); padding: 10px 4px 0; }
+.is-portrait img { width: auto; max-width: 100%; height: clamp(320px, 48vw, 560px); }
+</style>
+<style>.hero:not(:has(.hero__img)) { background-image: url("img/bac6b050ab.webp"); }
+</style>
+<style>
+/* speaker colours: the request names them; each pair switches with the theme */
+:root {
+--x-yf-bg: light-dark(#fbdbe7, #5b2439); --x-yf-fg: light-dark(#8c1f4c, #fbdbe7);
+--x-ym-bg: light-dark(#d8e6fb, #1f3a5f); --x-ym-fg: light-dark(#1e4f8f, #d8e6fb);
+--x-mm-bg: light-dark(#d6f0de, #1f4a2e); --x-mm-fg: light-dark(#1e6b3a, #d6f0de);
+--x-mf-bg: light-dark(#fbe8c4, #5a4114); --x-mf-fg: light-dark(#8a5a00, #fbe8c4);
+--x-old-bg: light-dark(#e6dcf7, #3f2d61); --x-old-fg: light-dark(#5a3a96, #e6dcf7);
+--x-wh-bg: light-dark(#dfe4ea, #343c47); --x-wh-fg: light-dark(#3f4b5a, #dfe4ea);
+}
+.x-spk { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: var(--r-pill); font: var(--type-tag); background: var(--x-wh-bg); color: var(--x-wh-fg); }
+.x-spk--yf { background: var(--x-yf-bg); color: var(--x-yf-fg); }
+.x-spk--ym { background: var(--x-ym-bg); color: var(--x-ym-fg); }
+.x-spk--mm { background: var(--x-mm-bg); color: var(--x-mm-fg); }
+.x-spk--mf { background: var(--x-mf-bg); color: var(--x-mf-fg); }
+.x-spk--old { background: var(--x-old-bg); color: var(--x-old-fg); }
+/* nav controls, sized like the theme button */
+.x-ctl { flex: none; min-width: 36px; height: 36px; padding: 0 8px; display: grid; place-items: center; border: 0; border-radius: var(--r-pill); background: var(--fill-segment); color: var(--text-primary-on); font: var(--type-tag); cursor: pointer; }
+.x-ctl[aria-pressed="true"] { box-shadow: inset 0 0 0 1.5px var(--text-primary-on); }
+.x-ctl:disabled, button.btn:disabled { opacity: 0.45; cursor: default; }
+@media (max-width: 599px) { .x-ctl { min-width: var(--tap); height: var(--tap); } .nav .seg a { min-width: var(--tap); justify-content: center; } }
+button.btn { cursor: pointer; }
+.btn[aria-pressed="true"] { background: var(--fill-primary); color: var(--text-primary-on); }
+.x-units { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 16px; align-items: start; }
+.x-unit { display: grid; gap: 12px; padding: 20px; border-radius: var(--r-m); background: var(--fill-tertiary); min-width: 0; }
+.x-unit h3 { font: var(--type-heading); }
+.x-label { font: var(--type-label); color: var(--text-secondary); margin-top: 4px; }
+.x-lines { display: grid; gap: 6px; }
+.x-line { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: var(--r-s); background: var(--fill-primary-on); cursor: pointer; min-height: var(--tap); transition: box-shadow var(--dur-quick) ease; }
+.x-line:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+.x-line.is-playing, .x-word.is-playing { box-shadow: inset 0 0 0 2px var(--fill-system-orange); }
+.x-line.is-playing .x-play { background: var(--fill-system-orange); color: #fff; }
+.x-play { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 50%; background: var(--fill-tertiary); color: var(--text-primary); font-size: var(--size-caption); }
+.x-en { font: var(--type-body-strong); margin-top: 4px; }
+.x-ko { font: var(--type-small); color: var(--text-secondary); margin-top: 2px; transition: filter var(--dur-quick) ease; }
+.x-hide-ko .x-ko:not(.is-shown) { filter: blur(6px); cursor: pointer; user-select: none; }
+.x-say { display: grid; gap: 6px; padding: 18px 20px; border-radius: var(--r-s); background: var(--fill-primary); color: var(--text-primary-on); transition: box-shadow var(--dur-quick) ease; }
+.x-say.is-playing { box-shadow: 0 0 0 3px var(--fill-system-orange); }
+.x-say__label { font: var(--type-tag); color: var(--text-secondary-on); }
+.x-say__en { font: var(--type-title); cursor: pointer; min-height: var(--tap); display: flex; align-items: center; }
+.x-say .x-ko { color: var(--text-secondary-on); font: var(--type-body); }
+.x-say__tip { font: var(--type-small); color: var(--text-secondary-on); padding-top: 8px; border-top: 1px solid var(--stroke-primary-on); margin-top: 4px; }
+.x-say .links { margin-top: 6px; }
+.x-words { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 8px; }
+.x-word { display: grid; gap: 2px; text-align: left; padding: 12px 14px; border: 0; border-radius: var(--r-s); background: var(--fill-tertiary); color: var(--text-primary); cursor: pointer; min-height: var(--tap); }
+.x-word:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+.x-word b { font: var(--type-body-strong); }
+.x-word b::before { content: "▶ "; font-size: var(--size-caption); color: var(--text-secondary); }
+.x-meta { font: var(--type-small); color: var(--text-secondary); margin-bottom: 8px; }
+.cards .x-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.cards .links { margin-top: 14px; }
+</style>
+</head>
+<body>
+<div class="page" id="top">
+<header class="nav glass" data-auto=""></header>
+<main class="main" id="main">
+<section class="hero">
+<img class="hero__img" src="img/555403cf2d.jpg" alt="하버 브리지가 보이는 시드니 골목 카페"/>
+<div class="hero__copy">
+<p class="hero__eyebrow">2026년 11월 2일 – 8일 · 시드니 신혼여행</p>
+<h1>시드니 신혼여행 영어 — 듣기는 여러 가지, 말하기는 한 가지</h1>
+<p class="hero__sub">화장실 · 길 묻기 · 쇼핑 · 음식 주문 + 우리 일정 장면</p>
+<p class="hero__meta">영어 문장을 누르면 바로 들려요</p>
+</div>
+<aside class="callout" aria-label="공부 방법">
+<p class="callout__head"><span class="hark-mark" data-size="16"></span> 공부 방법</p>
+<p class="callout__lead">
+<strong>말하기는 상황마다 한 문장만 외우세요.</strong> 듣기는 20대 여성·20대 남성·중년 남성·중년 여성·어르신·워홀러 점원 버전을 들어보고 알아듣기만 하면 돼요.
+</p>
+<a class="btn" href="#s0">0장부터 듣기</a>
+</aside>
+</section>
+<div class="links" aria-label="듣기 설정">
+<button class="btn" type="button" data-act="toggle-ko" aria-pressed="false">한국어 뜻 숨기기</button>
+<button class="btn" type="button" data-act="speed" aria-pressed="false">속도 1x</button>
+<button class="btn" type="button" data-act="stop" disabled="">■ 정지</button>
+</div>
+<div id="lesson-sections" style="display: contents"></div>
+<section class="section" id="speakers" data-nav="화자">
+<div class="head">
+<h2>화자별 말투 특징</h2>
+<p class="head__sub">누가 말하느냐에 따라 같은 질문도 이렇게 달라져요.</p>
+</div>
+<div class="cards" id="speaker-cards"></div>
+</section>
+<section class="section" id="words" data-nav="단어">
+<div class="head">
+<h2>귀로 익힐 호주 말</h2>
+<p class="head__sub">말할 필요는 없어요. 들리면 알아채기만 하면 돼요. 누르면 들려요.</p>
+</div>
+<div class="x-words" id="word-grid"></div>
+</section>
+<section class="section" id="videos" data-nav="영상">
+<div class="head">
+<h2>추천 영상</h2>
+<p class="head__sub">공부 계획에 맞춰 보는 날을 적어 뒀어요.</p>
+</div>
+<div class="cards" id="video-cards"></div>
+</section>
+<section class="section" id="plan" data-nav="계획">
+<div class="head">
+<h2>출국 전 공부 계획</h2>
+<p class="head__sub">하루 10–30분이면 충분해요.</p>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th scope="col">날짜</th>
+<th scope="col">할 일</th>
+<th scope="col">시간</th>
+</tr>
+</thead>
+<tbody id="plan-rows"></tbody>
+</table>
+</div>
+</section>
+</main>
+<footer class="foot">
+<p>음성은 AI 음성이에요. 호주 억양 남녀 목소리에 톤과 빠르기를 바꿔 나이대를 표현했고, 워홀러는 호주 정부 2024-25 워홀 비자 발급 비율(영국·프랑스·아일랜드·이탈리아·한국 순)에 맞춰 억양을 섞었어요.</p>
+<nav aria-label="섹션으로 돌아가기" data-auto=""></nav>
+<a class="badge" href="https://hark.com/" rel="noopener" target="_blank"><span class="hark-mark"></span><span>built by hark</span></a>
+</footer>
+</div>
+<script type="application/json" id="lessons">{"speakers": {"YF":"20대 여성","YM":"20대 남성","MM":"중년 남성","MF":"중년 여성","OLD":"어르신","WH_GB":"워홀러 (영국)","WH_GB2":"워홀러 (영국)","WH_FR":"워홀러 (프랑스)","WH_IE":"워홀러 (아일랜드)","WH_IT":"워홀러 (이탈리아)","WH_KR":"워홀러 (한국)","WH_DE":"워홀러 (독일)"}, "speaker_notes": [["20대 여성","말 빠르고 끝이 올라가요(\"...today?↗\"). Oh my god, totally, so 같은 감탄이 많아요."], ["20대 남성","mate, all good, sweet, legend. 단어를 짧게 끊어요(goin', 'em)."], ["중년 남성","G'day, no dramas, the go. 억양이 가장 '호주스러워요'."], ["중년 여성","love를 자주 붙여요(\"Are you right, love?\"). 친절하고 또박또박."], ["어르신","dear, dears. 천천히, 정중하게. 길을 아주 자세히 알려줘요."], ["워홀러 점원","호주 정부 통계(2024-25 워홀 비자 발급 32만 건)로 보면 영국 25%, 프랑스 13%, 아일랜드 8%, 이탈리아 6%, 한국 5%, 대만·일본·독일 각 5% 순이에요. 그래서 이 자료의 워홀러 대사도 영국 6 · 프랑스 3 · 아일랜드 3 · 한국 2 · 이탈리아 1 · 독일 1 비율로 넣었어요. 시드니 카페·식당에선 영국·아일랜드 억양을 가장 자주 듣게 돼요. 도시별 통계는 따로 없고 전국 수치예요."]], "sections": [{"num":"0","title":"인사 · 기본 리액션","lead":"호주에선 점원·기사님·옆 사람까지 다 먼저 말을 걸어요. 질문 형태는 제각각이어도 대답은 하나면 돼요.","units": [{"situation":"가게 들어가면 듣는 인사 (잘 지내요?)","order":"they","speak": {"en":"Good, thanks. How are you?","ko":"좋아요, 그쪽은요?","tip":"어떤 인사가 와도 이 한 문장. 'How ya going?'은 '어디 가냐'가 아니에요","audio":"audio/cc5a0b81a9.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Hiii, how are we today?","ko":"안녕하세요~ 오늘 어떠세요?","audio":"audio/da9451055b.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Hey, how's it goin'?","ko":"안녕, 잘 지내요?","audio":"audio/330cea54c0.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"G'day, how ya goin', mate?","ko":"안녕하쇼, 잘 지내요?","audio":"audio/c2241ecace.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Hello love, how are you going?","ko":"어서 와요, 잘 지내요?","audio":"audio/b219787ebd.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Good morning, dear. Lovely day, isn't it?","ko":"좋은 아침이에요. 날씨 좋죠?","audio":"audio/9df8bb4d2c.mp3"}, {"speaker":"WH_GB","speaker_label":"워홀러 (영국)","en":"Hiya, you alright?","ko":"안녕하세요, 잘 지내요?","audio":"audio/8b4e54d810.mp3"}]}, {"situation":"고맙다고 했을 때 돌아오는 말","order":"me","speak": {"en":"Thanks so much!","ko":"정말 고마워요!","tip":"Cheers! 도 좋아요","audio":"audio/0196437049.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"No worries!","ko":"천만에요!","audio":"audio/6e2f1443ae.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"All good, mate.","ko":"괜찮아요.","audio":"audio/509713f566.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"No dramas.","ko":"별말을요.","audio":"audio/903352789f.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"You're welcome, love.","ko":"천만에요.","audio":"audio/172f5a90a3.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"My pleasure, dear.","ko":"제가 좋아서 한 건데요.","audio":"audio/d58dfb35fb.mp3"}, {"speaker":"WH_KR","speaker_label":"워홀러 (한국)","en":"No problem!","ko":"문제없어요!","audio":"audio/2d964eafd8.mp3"}]}, {"situation":"못 알아들었을 때","order":"me","speak": {"en":"Sorry, I didn't catch that.","ko":"죄송해요, 못 알아들었어요.","tip":"Sorry? 한 마디도 OK. 대부분 천천히 다시 말해줘요","audio":"audio/aafe17de2a.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Oh sorry! I said, is that for here?","ko":"아 미안해요! 여기서 드시냐고요.","audio":"audio/24882395af.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"No worries. Eat in or takeaway?","ko":"괜찮아요. 먹고 가요, 가져가요?","audio":"audio/270abd910b.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"I'm sorry, dear, I'll speak up.","ko":"미안해요, 크게 말할게요.","audio":"audio/0a12c8df38.mp3"}]}]}, {"num":"1","title":"화장실 찾을 때","lead":"호주는 restroom보다 toilets. 직설적으로 물어도 전혀 무례하지 않아요.","units": [{"situation":"화장실이 어디예요?","order":"me","speak": {"en":"Sorry, where are the toilets?","ko":"저기요, 화장실 어디예요?","tip":"Sorry = Excuse me. 호주에선 말 걸 때 Sorry를 많이 써요","audio":"audio/5ce163a506.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Just down the back, on your left!","ko":"안쪽 끝, 왼쪽이에요!","audio":"audio/c15cfbeb2d.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Yeah, out the back, mate.","ko":"뒤쪽이에요.","audio":"audio/d799f0fa44.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Through there, past the bar, first door on the right.","ko":"저리로 가서 바 지나 오른쪽 첫 문이요.","audio":"audio/57d32bf345.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"They're just upstairs, love.","ko":"위층이에요.","audio":"audio/6bd3a8166d.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Go right to the end, dear, then turn left.","ko":"끝까지 가서 왼쪽으로 돌아요.","audio":"audio/4c789d6874.mp3"}, {"speaker":"WH_FR","speaker_label":"워홀러 (프랑스)","en":"Ehm, behind the counter, just there.","ko":"음, 카운터 뒤 저기요.","audio":"audio/c6a6ca95dd.mp3"}]}, {"situation":"카페 화장실 써도 돼요?","order":"me","speak": {"en":"Mind if I use your toilet?","ko":"화장실 좀 써도 될까요?","tip":"먼저 커피 하나 사면 더 자연스러워요","audio":"audio/58b7dcd3b0.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Yeah, of course, go for it!","ko":"그럼요, 쓰세요!","audio":"audio/1730fe48f2.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Sorry mate, customers only.","ko":"죄송한데 손님만 돼요.","audio":"audio/398dc3637a.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Yeah, no worries. Code's on your receipt.","ko":"그럼요. 비밀번호는 영수증에 있어요.","audio":"audio/7d2a41fd0d.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Sure, love, the key's just on the hook there.","ko":"네, 열쇠는 저 고리에 있어요.","audio":"audio/58b0eb542a.mp3"}, {"speaker":"WH_GB","speaker_label":"워홀러 (영국)","en":"Sorry, it's only for paying customers.","ko":"죄송한데 결제한 손님만요.","audio":"audio/bff54063f9.mp3"}]}, {"situation":"근처에 공중화장실 있어요?","order":"me","speak": {"en":"Are there any public toilets around here?","ko":"근처에 공중화장실 있어요?","tip":"공원·해변은 'Amenities' 표지","audio":"audio/f75629e9bb.mp3"}, "hear": [{"speaker":"YM","speaker_label":"20대 남성","en":"Yeah, there's some in the park, just over there.","ko":"네, 저기 공원에 있어요.","audio":"audio/dccc712e31.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Try Westfield, love, there's toilets on level two.","ko":"웨스트필드 가보세요, 2층에 있어요.","audio":"audio/44e7f324fb.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"There's one at the station, dear.","ko":"역에 하나 있어요.","audio":"audio/da78a8df69.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Nearest one's down by the beach, near the surf club.","ko":"제일 가까운 건 해변 서프클럽 옆이요.","audio":"audio/2bf6df25a1.mp3"}]}]}, {"num":"2","title":"길 물어볼 때","lead":"대답은 사람마다 제각각이지만 핵심 단어는 몇 개뿐이에요: the lights(신호등), head down(쭉 가다), a bit of a hike(꽤 멀다).","units": [{"situation":"서큘러 키 어느 쪽이에요?","order":"me","speak": {"en":"Sorry, which way's Circular Quay?","ko":"저기요, 서큘러 키 어느 쪽이에요?","tip":"Quay는 '키'. 목적지만 바꿔서 계속 쓰세요","audio":"audio/b5c10f6a5f.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Oh, just head straight down George Street, you can't miss it.","ko":"조지 스트리트로 쭉 내려가면 바로 보여요.","audio":"audio/e9bc2faeaa.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Straight down there, mate, all the way to the water.","ko":"저리로 쭉, 물 나올 때까지요.","audio":"audio/2ea2f52e77.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Left at the lights, then keep going till you hit the harbour.","ko":"신호등에서 왼쪽, 항구 나올 때까지 쭉.","audio":"audio/aa2ff3481b.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"It's that way, love, about ten minutes.","ko":"저쪽이에요, 10분쯤.","audio":"audio/4c93684fb7.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Down the hill, dear. Follow the ferries.","ko":"언덕 아래로 가요. 페리 보이는 쪽으로.","audio":"audio/12de29b873.mp3"}, {"speaker":"WH_IT","speaker_label":"워홀러 (이탈리아)","en":"I think it's that way? Maybe check Google Maps.","ko":"저쪽 같은데요? 구글맵도 확인해보세요.","audio":"audio/ef58611da6.mp3"}]}, {"situation":"걸어갈 만해요?","order":"me","speak": {"en":"Is it walkable from here?","ko":"여기서 걸어갈 만해요?","tip":"","audio":"audio/4f7ce2be52.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Yeah, it's like ten minutes, easy.","ko":"네, 한 10분? 금방이에요.","audio":"audio/68dc7dc5c4.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Nah, it's a bit of a hike. I'd jump on the train.","ko":"아뇨, 꽤 멀어요. 저라면 기차 타요.","audio":"audio/5160b348f1.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"You can walk it, mate. Fifteen minutes, tops.","ko":"걸어가도 돼요. 길어야 15분.","audio":"audio/a352efe99d.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"It's a fair way, love. I'd get the bus.","ko":"꽤 멀어요. 버스 타세요.","audio":"audio/54ac1d24c4.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Oh, I'd take the bus, dear. It's all uphill.","ko":"버스 타요. 계속 오르막이에요.","audio":"audio/d36526a17d.mp3"}]}, {"situation":"이 버스 본다이 가요? (기사님께)","order":"me","speak": {"en":"Hi, does this go to Bondi Beach?","ko":"안녕하세요, 이거 본다이 비치 가요?","tip":"333번. 정류장에서 손 들어 세우고, 탈 때 카드 찍기","audio":"audio/4c23f48cdb.mp3"}, "hear": [{"speaker":"MM","speaker_label":"중년 남성","en":"Yep, hop on.","ko":"네, 타세요.","audio":"audio/7561853a74.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Not this one, love. You want the 333.","ko":"이건 아니에요. 333번 타요.","audio":"audio/ab0c5d0acd.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Yeah, mate. Tap on there.","ko":"네. 거기 카드 찍어요.","audio":"audio/7a0d689a8e.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"This one goes to Bondi Junction, dear, not the beach.","ko":"이건 본다이 정션 가요, 해변 말고.","audio":"audio/e78ced86fa.mp3"}]}, {"situation":"도착하면 알려주실래요?","order":"me","speak": {"en":"Could you let us know when we get to Bondi?","ko":"본다이 도착하면 알려주실래요?","tip":"","audio":"audio/7208b30f18.mp3"}, "hear": [{"speaker":"MM","speaker_label":"중년 남성","en":"Yeah, no worries. I'll give you a shout.","ko":"그래요, 소리쳐 알려줄게요.","audio":"audio/25a892db5b.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Sure, love. It's the last stop anyway.","ko":"그래요. 어차피 종점이에요.","audio":"audio/4be937779d.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Easy. It's about twenty minutes.","ko":"그럼요. 20분쯤 걸려요.","audio":"audio/06afcceed6.mp3"}]}]}, {"num":"3","title":"쇼핑할 때","lead":"점원은 꼭 먼저 말을 걸어요. 'Are you right?'은 '괜찮으세요?'가 아니라 '도와드릴까요?'예요.","units": [{"situation":"도와드릴까요?","order":"they","speak": {"en":"Just looking, thanks.","ko":"그냥 구경 중이에요.","tip":"","audio":"audio/4c11300dcc.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Hey! Are you looking for anything in particular?","ko":"찾으시는 거 있어요?","audio":"audio/d1c98784b1.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"How we goin'? Shout out if you need anything.","ko":"필요한 거 있으면 불러요.","audio":"audio/57f4c60796.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"G'day, you right there?","ko":"도와드릴까요?","audio":"audio/998f1dd293.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Hi there, are you right, or just browsing?","ko":"도와드릴까요, 그냥 보세요?","audio":"audio/051e32030e.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Have a good look, dear. No rush.","ko":"천천히 보세요.","audio":"audio/d65c05cfb0.mp3"}, {"speaker":"WH_GB2","speaker_label":"워홀러 (영국)","en":"Hi! Can I help you with anything?","ko":"도와드릴까요?","audio":"audio/8fff987a86.mp3"}]}, {"situation":"이거 다른 사이즈 있어요?","order":"me","speak": {"en":"Do you have this in a small?","ko":"이거 스몰 있어요?","tip":"small → medium / large / in black","audio":"audio/a10c10fe6d.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Let me check out the back for you!","ko":"창고 확인해볼게요!","audio":"audio/88b00e474c.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Nah, sorry, that's all we've got.","ko":"아뇨, 그게 다예요.","audio":"audio/2d36e25739.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"I'll have a look in the back for you, love.","ko":"뒤에 한번 볼게요.","audio":"audio/5d49710126.mp3"}, {"speaker":"WH_FR","speaker_label":"워홀러 (프랑스)","en":"I think we are sold out, sorry.","ko":"품절인 것 같아요, 죄송해요.","audio":"audio/7e43e910b7.mp3"}]}, {"situation":"입어봐도 돼요?","order":"me","speak": {"en":"Can I try this on?","ko":"이거 입어봐도 돼요?","tip":"탈의실 = change rooms","audio":"audio/67594360a7.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Yeah, totally! Change rooms are just there.","ko":"그럼요! 탈의실은 저기요.","audio":"audio/d0e010fcc6.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Of course, love. How many items have you got?","ko":"그럼요. 몇 벌 가져가세요?","audio":"audio/0cac901be0.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Go for it, mate. Just at the back.","ko":"입어보세요. 뒤쪽이에요.","audio":"audio/3dbbedec49.mp3"}]}, {"situation":"계산할 때 점원이 하는 말","order":"they","speak": {"en":"Card's fine, thanks.","ko":"카드로 할게요.","tip":"어떤 질문이 와도 카드 내밀면서 이 한 마디","audio":"audio/e3e0596efb.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Just tap whenever you're ready!","ko":"준비되면 카드 대세요!","audio":"audio/cf24d28d02.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Tap there, mate.","ko":"거기 찍어요.","audio":"audio/947486a121.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"There's a one-and-a-half percent surcharge on card, that alright?","ko":"카드는 1.5% 수수료 붙는데 괜찮아요?","audio":"audio/238c3c1dfc.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Did you want a receipt with that, love?","ko":"영수증 드릴까요?","audio":"audio/ad9e6feb96.mp3"}, {"speaker":"WH_GB","speaker_label":"워홀러 (영국)","en":"Tap or insert?","ko":"대실래요, 꽂으실래요?","audio":"audio/717011450b.mp3"}]}, {"situation":"봉투 필요하세요?","order":"they","speak": {"en":"No, I'm good, thanks.","ko":"괜찮아요.","tip":"봉투는 유료예요. 에코백 챙기기","audio":"audio/4a98f6636d.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Did you need a bag for that?","ko":"봉투 필요하세요?","audio":"audio/2e4550f0a1.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Bag?","ko":"봉투?","audio":"audio/50349eba4e.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Bags are fifteen cents, love, did you want one?","ko":"봉투 15센트인데 드릴까요?","audio":"audio/de98a2d79d.mp3"}, {"speaker":"WH_KR","speaker_label":"워홀러 (한국)","en":"Do you need a bag?","ko":"봉투 필요하세요?","audio":"audio/8104c05247.mp3"}]}, {"situation":"TRS 세금 환급 영수증","order":"me","speak": {"en":"Could I get a tax invoice for the TRS?","ko":"TRS 환급용 영수증 주실래요?","tip":"한 가게 A$300 이상일 때만. 여권 지참","audio":"audio/f1419785f6.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Yep! Can I grab your name for it?","ko":"네! 성함 알려주세요.","audio":"audio/b2b32c00c5.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Of course. It's over three hundred, so you're all good.","ko":"물론이죠. 300 넘으니 돼요.","audio":"audio/884c0f3196.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Sure, I'll print one off.","ko":"네, 하나 뽑아드릴게요.","audio":"audio/fe408f7ca2.mp3"}]}, {"situation":"플리마켓 흥정","order":"me","speak": {"en":"Could you do forty for both?","ko":"둘 다 40에 안 될까요?","tip":"빈티지·플리마켓에서만. 웃으면서 가볍게","audio":"audio/3193f9d63e.mp3"}, "hear": [{"speaker":"MM","speaker_label":"중년 남성","en":"Go on then. Forty.","ko":"에이, 그래요. 40.","audio":"audio/fa7916cab5.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"I can do forty-five, love.","ko":"45까진 해줄게요.","audio":"audio/30f43f342a.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Oh, go on, since you asked nicely.","ko":"착하게 물어봤으니 그래요.","audio":"audio/7f95896eeb.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Sorry, mate, prices are firm.","ko":"죄송한데 정가예요.","audio":"audio/97119ee218.mp3"}, {"speaker":"YF","speaker_label":"20대 여성","en":"Cash only for that price, though.","ko":"그 가격이면 현금만요.","audio":"audio/937540b917.mp3"}]}]}, {"num":"4","title":"음식 주문할 때 (카페 · 식당)","lead":"카페는 사이즈 → 메뉴 → 우유 순서. 아메리카노 대신 롱블랙. 계산서는 bill, 포장은 takeaway. 팁은 안 줘도 돼요.","units": [{"situation":"주문 받을 때","order":"they","speak": {"en":"Can I get a flat white and a long black, please?","ko":"플랫화이트 하나랑 롱블랙 하나요.","tip":"롱블랙 ≈ 진한 아메리카노","audio":"audio/3a68bc8c13.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Hi! What can I get you?","ko":"뭐 드릴까요?","audio":"audio/dde211a054.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"What are we having today?","ko":"오늘 뭐 드실래요?","audio":"audio/91968fb137.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"What'll it be, mate?","ko":"뭘로 할래요?","audio":"audio/e268c592db.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"What can I get for you, love?","ko":"뭐 드릴까요?","audio":"audio/ebfbe0f2f6.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Now, what would you like, dears?","ko":"자, 뭐 드시겠어요?","audio":"audio/c2469631a7.mp3"}, {"speaker":"WH_IE","speaker_label":"워홀러 (아일랜드)","en":"Hi there, what can I get for you?","ko":"뭐 드릴까요?","audio":"audio/cdcc742e01.mp3"}]}, {"situation":"먹고 가요, 포장이에요?","order":"they","speak": {"en":"Having here, thanks.","ko":"먹고 갈게요.","tip":"포장이면 'Takeaway, thanks.'","audio":"audio/5d28fc2a15.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Is that for here?","ko":"여기서 드세요?","audio":"audio/9e861b5b51.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Having here?","ko":"드시고 가요?","audio":"audio/e19733996e.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Eat in or takeaway?","ko":"먹고 가요, 가져가요?","audio":"audio/08f20e67ed.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Dine in or takeaway, love?","ko":"드시고 가세요, 포장이세요?","audio":"audio/29dea3f674.mp3"}, {"speaker":"WH_GB2","speaker_label":"워홀러 (영국)","en":"For here or takeaway?","ko":"여기서요, 포장이요?","audio":"audio/4054dfacc8.mp3"}]}, {"situation":"우유 뭘로 할까요?","order":"they","speak": {"en":"Regular milk's fine.","ko":"그냥 일반 우유요.","tip":"oat / soy / almond / skinny(저지방)","audio":"audio/b9d6f41b67.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Any milk preference?","ko":"원하는 우유 있어요?","audio":"audio/3aecabb694.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Full cream okay?","ko":"일반 우유 괜찮죠?","audio":"audio/69ff104a04.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Normal milk, love?","ko":"일반 우유요?","audio":"audio/b44a5c988f.mp3"}]}, {"situation":"이름 알려주세요","order":"they","speak": {"en":"It's Lee. L-E-E.","ko":"Lee예요. 엘, 이, 이.","tip":"짧은 영어 이름을 하나 정해두면 편해요","audio":"audio/e353acd370.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Can I grab a name for that?","ko":"성함 알려주실래요?","audio":"audio/690c918a13.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Name for the order?","ko":"주문 이름은요?","audio":"audio/5673a50720.mp3"}, {"speaker":"WH_GB","speaker_label":"워홀러 (영국)","en":"And what's the name?","ko":"이름은요?","audio":"audio/96962408fa.mp3"}]}, {"situation":"식당 입구에서","order":"they","speak": {"en":"Hi, we've got a booking for seven-thirty, under Lee.","ko":"7시 반에 Lee로 예약했어요.","tip":"예약 없으면 'Table for two, please.'","audio":"audio/39b29bd759.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Hi guys! Just the two of you tonight?","ko":"안녕하세요! 오늘 두 분이세요?","audio":"audio/0a37e7cd9a.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Evening. Have you got a booking?","ko":"안녕하세요. 예약하셨어요?","audio":"audio/b16602fed9.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Welcome! Is there a booking under a name?","ko":"어서 오세요! 예약 성함이요?","audio":"audio/65199fd8b3.mp3"}, {"speaker":"WH_DE","speaker_label":"워홀러 (독일)","en":"Hi, do you have a reservation?","ko":"예약하셨어요?","audio":"audio/36013219b0.mp3"}]}, {"situation":"여기 주문은 어디서 해요?","order":"me","speak": {"en":"Do we order here or at the counter?","ko":"주문 여기서 해요, 카운터에서 해요?","tip":"펍·캐주얼 식당은 카운터 주문이 많아요","audio":"audio/64fd725b2a.mp3"}, "hear": [{"speaker":"YM","speaker_label":"20대 남성","en":"Order up at the bar, mate. Grab a number.","ko":"바에서 주문하고 번호표 가져가요.","audio":"audio/5128716b10.mp3"}, {"speaker":"YF","speaker_label":"20대 여성","en":"Just scan the QR code on the table!","ko":"테이블 QR 찍으면 돼요!","audio":"audio/7083c2f6ad.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"I'll come take your order, love.","ko":"제가 주문 받으러 갈게요.","audio":"audio/2cf054068e.mp3"}]}, {"situation":"뭐가 맛있어요?","order":"me","speak": {"en":"What's good here?","ko":"여기 뭐가 맛있어요?","tip":"","audio":"audio/1cdbfb9e01.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Oh my god, the chilli scrambled eggs are amazing.","ko":"칠리 스크램블 진짜 맛있어요.","audio":"audio/f3822e590c.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Can't go past the burger, mate.","ko":"버거는 꼭 먹어야죠.","audio":"audio/79ed1afed9.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"The prime rib's the go.","ko":"프라임립이 정답이죠.","audio":"audio/9dde04035a.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Everyone loves the barramundi.","ko":"다들 바라문디 좋아해요.","audio":"audio/71817b3657.mp3"}, {"speaker":"WH_IE","speaker_label":"워홀러 (아일랜드)","en":"People really like the pasta, to be honest.","ko":"솔직히 파스타 많이 시켜요.","audio":"audio/d8484f2bff.mp3"}]}, {"situation":"고기 굽기 어떻게 할까요?","order":"they","speak": {"en":"Medium-rare, please.","ko":"미디엄 레어요.","tip":"rare / medium / well done","audio":"audio/0003804a22.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"And how would you like that cooked?","ko":"굽기는 어떻게 해드릴까요?","audio":"audio/13ae3adbb7.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"How do you want your steak?","ko":"스테이크 어떻게 해줄까요?","audio":"audio/8e3f3b18fd.mp3"}, {"speaker":"WH_FR","speaker_label":"워홀러 (프랑스)","en":"Which cooking for the steak?","ko":"스테이크 굽기는요?","audio":"audio/d805a8a177.mp3"}]}, {"situation":"물·음료 뭐 드릴까요?","order":"they","speak": {"en":"Just tap water, thanks. Have you got any mocktails?","ko":"수돗물이요. 무알코올 칵테일 있어요?","tip":"수돗물은 무료. 술 안 마시면 mocktail","audio":"audio/ef7bb10d96.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Still or sparkling?","ko":"생수요, 탄산수요?","audio":"audio/bddbc788bd.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Can I get you guys anything to drink?","ko":"음료 드릴까요?","audio":"audio/ce836ee50a.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Something to drink, or just water?","ko":"음료요, 물이요?","audio":"audio/0470cda0b3.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Drinks to start?","ko":"음료 먼저?","audio":"audio/4f68f22452.mp3"}]}, {"situation":"식사 중에 '괜찮으세요?'","order":"they","speak": {"en":"Really good, thanks!","ko":"정말 맛있어요!","tip":"","audio":"audio/4c65832676.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"How is everything?","ko":"괜찮으세요?","audio":"audio/dab19d3a08.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"How we going here?","ko":"괜찮아요?","audio":"audio/41ef91f6d9.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"How's it all tasting?","ko":"맛은 괜찮아요?","audio":"audio/45760bfe2c.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Everything alright for you, dears?","ko":"다 괜찮아요?","audio":"audio/dec357137e.mp3"}]}, {"situation":"계산할게요","order":"me","speak": {"en":"Could we get the bill, please?","ko":"계산서 주세요.","tip":"check보다 bill","audio":"audio/2da7926774.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Yep, I'll bring it right over!","ko":"네, 바로 가져갈게요!","audio":"audio/5dc0468213.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"You can just pay up at the counter.","ko":"카운터에서 계산하시면 돼요.","audio":"audio/77e9d4c323.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Together or separate, love?","ko":"같이요, 따로요?","audio":"audio/b259f79325.mp3"}]}]}, {"num":"5","title":"우리 일정에 꼭 나오는 장면","lead":"신혼여행 가이드(11/3–11/8)를 보고 4가지 상황 말고 실제로 겪을 장면을 골랐어요.","units": [{"situation":"11/3 입국 심사 · 여행 목적","order":"they","speak": {"en":"We're here on our honeymoon.","ko":"신혼여행 왔어요.","tip":"","audio":"audio/c0f68cd95e.mp3"}, "hear": [{"speaker":"MF","speaker_label":"중년 여성","en":"What brings you to Australia?","ko":"호주엔 무슨 일로 오셨어요?","audio":"audio/b42b4eea4b.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Business or holiday?","ko":"출장이에요, 여행이에요?","audio":"audio/32160b6aa1.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Here on holiday?","ko":"여행 오셨어요?","audio":"audio/5f92ae57a3.mp3"}]}, {"situation":"11/3 세관 · 신고할 것","order":"they","speak": {"en":"Yes, just some snacks and medicine.","ko":"네, 과자랑 약이요.","tip":"신고하면 대부분 통과","audio":"audio/433d94214b.mp3"}, "hear": [{"speaker":"MM","speaker_label":"중년 남성","en":"Anything to declare?","ko":"신고할 것 있어요?","audio":"audio/2f47b11041.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Any food or medication in your bags today?","ko":"가방에 음식이나 약 있어요?","audio":"audio/1e8c2a2ff0.mp3"}, {"speaker":"YF","speaker_label":"20대 여성","en":"Are you carrying any food?","ko":"음식 갖고 계세요?","audio":"audio/b5648c0e1d.mp3"}]}, {"situation":"11/3 공항 택시","order":"me","speak": {"en":"Four Seasons on George Street, please. That's the flat rate, right?","ko":"조지 스트리트 포시즌스요. 정액 맞죠?","tip":"공항→시내 정액 A$60","audio":"audio/16e48e09cd.mp3"}, "hear": [{"speaker":"MM","speaker_label":"중년 남성","en":"Yep, sixty bucks flat to the city.","ko":"네, 시내까지 60달러 정액.","audio":"audio/ee85d8d49b.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Yeah, sixty, plus a bit for card.","ko":"네, 60에 카드 수수료 조금.","audio":"audio/0af37f8a39.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"That's right. Pop your bags in the boot.","ko":"맞아요. 짐은 트렁크에.","audio":"audio/615b0c9fc6.mp3"}]}, {"situation":"11/3·11/4 호텔 · 짐 맡기기","order":"me","speak": {"en":"We're a bit early. Can we leave our bags here?","ko":"좀 일찍 왔는데 짐 맡겨도 돼요?","tip":"","audio":"audio/4b0bb975e8.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Absolutely! I'll pop them in the luggage room.","ko":"그럼요! 짐 보관실에 둘게요.","audio":"audio/9f5df6c667.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"No worries. Here's your ticket.","ko":"네. 보관표 여기요.","audio":"audio/8f5019d053.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Of course. Your room should be ready by three.","ko":"물론이죠. 방은 3시쯤 준비돼요.","audio":"audio/21157e9ddd.mp3"}]}, {"situation":"신혼여행이라고 하면","order":"they","speak": {"en":"Thank you so much!","ko":"정말 고마워요!","tip":"","audio":"audio/f9c0051163.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Oh my god, congrats! That's so exciting!","ko":"어머 축하해요! 너무 좋겠다!","audio":"audio/9e95dd24bd.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Legend! Congrats, mate.","ko":"멋지다! 축하해요.","audio":"audio/bb657bf9bc.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Good on ya! Congratulations.","ko":"잘했네요! 축하해요.","audio":"audio/b528e54eb6.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Oh, how lovely! Congratulations, you two.","ko":"어머 좋아라! 두 분 축하해요.","audio":"audio/dde69b5967.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Congratulations, dears. Enjoy every minute.","ko":"축하해요. 매 순간 즐겨요.","audio":"audio/1a57585f2f.mp3"}, {"speaker":"WH_IE","speaker_label":"워홀러 (아일랜드)","en":"Aw, congrats! Have the best time!","ko":"축하해요! 최고의 시간 보내요!","audio":"audio/21308e8872.mp3"}]}, {"situation":"사진 부탁","order":"me","speak": {"en":"Would you mind taking a photo of us?","ko":"사진 좀 찍어주실래요?","tip":"","audio":"audio/b50cccf428.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Of course! Want the Opera House in it?","ko":"그럼요! 오페라하우스 나오게요?","audio":"audio/c21d442a03.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"Yeah, sweet. Landscape or portrait?","ko":"좋아요. 가로요, 세로요?","audio":"audio/2abbd8c72c.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Oh, of course, love. Say cheese!","ko":"그럼요. 치즈~","audio":"audio/77523c0dee.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"I'll try, dear. Which button do I press?","ko":"해볼게요. 어느 버튼 눌러요?","audio":"audio/a676687822.mp3"}]}, {"situation":"11/6 페더데일 · 만져도 돼요?","order":"me","speak": {"en":"Are we allowed to pat them?","ko":"쓰다듬어도 돼요?","tip":"pat = 쓰다듬다","audio":"audio/e20022ad42.mp3"}, "hear": [{"speaker":"YF","speaker_label":"20대 여성","en":"Yep, gently on the back, not the head.","ko":"네, 등만 살살, 머리는 안 돼요.","audio":"audio/53fd66af35.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Two fingers, mate. Nice and gentle.","ko":"손가락 두 개로 살살요.","audio":"audio/81d5ccda96.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Not this one, love, but the kangaroos are fine.","ko":"얘는 안 되고 캥거루는 돼요.","audio":"audio/a7726d78cb.mp3"}]}, {"situation":"11/7 아이스버그 수영장 입장","order":"me","speak": {"en":"Hi, two adults, please.","ko":"성인 두 명이요.","tip":"입장료에 사우나 포함","audio":"audio/8344609963.mp3"}, "hear": [{"speaker":"YM","speaker_label":"20대 남성","en":"That's twenty. Towels are five each if you need 'em.","ko":"20달러요. 수건은 하나 5달러.","audio":"audio/0b484e64db.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Sauna's downstairs, love. Fifteen minutes max.","ko":"사우나는 아래층, 최대 15분이에요.","audio":"audio/2b0ce56dad.mp3"}, {"speaker":"YF","speaker_label":"20대 여성","en":"Heads up, the water's pretty fresh today!","ko":"오늘 물 꽤 차가워요!","audio":"audio/6f75f93c26.mp3"}]}, {"situation":"약국 (chemist)","order":"me","speak": {"en":"Have you got anything for seasickness?","ko":"뱃멀미약 있어요?","tip":"headache / sunburn / a cold 로 바꿔 쓰기","audio":"audio/42d9701894.mp3"}, "hear": [{"speaker":"MF","speaker_label":"중년 여성","en":"Are you taking any other medication?","ko":"다른 약 드시는 거 있어요?","audio":"audio/38c88bfed7.mp3"}, {"speaker":"YM","speaker_label":"20대 남성","en":"These ones. Take one half an hour before.","ko":"이거요. 30분 전에 하나.","audio":"audio/1e2fab7b31.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"Make sure you have something to eat first, dear.","ko":"먼저 뭘 좀 드시고 드세요.","audio":"audio/b52e4b6ff8.mp3"}]}, {"situation":"날씨 스몰토크","order":"they","speak": {"en":"Yeah, it's beautiful!","ko":"그러게요, 날씨 좋네요!","tip":"추우면 'Yeah, bit chilly!'","audio":"audio/16b5b6a421.mp3"}, "hear": [{"speaker":"YM","speaker_label":"20대 남성","en":"Stinker today, eh?","ko":"오늘 덥죠?","audio":"audio/3a6e4b9c90.mp3"}, {"speaker":"MM","speaker_label":"중년 남성","en":"Bit fresh this morning.","ko":"아침엔 좀 쌀쌀하네요.","audio":"audio/8f7bd6fd00.mp3"}, {"speaker":"MF","speaker_label":"중년 여성","en":"Gorgeous day for it!","ko":"날씨 끝내주네요!","audio":"audio/ab8e8165a0.mp3"}, {"speaker":"OLD","speaker_label":"어르신","en":"They reckon rain this arvo.","ko":"오후에 비 온대요.","audio":"audio/9f6de57386.mp3"}]}]}], "hear_words": [{"en":"arvo","ko":"오후","audio":"audio/cd3b0d7263.mp3"}, {"en":"brekkie","ko":"아침식사","audio":"audio/201b7fdac1.mp3"}, {"en":"heaps","ko":"엄청 (very / a lot)","audio":"audio/6da34c80b4.mp3"}, {"en":"reckon","ko":"~인 것 같아","audio":"audio/4dd4de17c6.mp3"}, {"en":"keen","ko":"하고 싶은, 신난","audio":"audio/33963107f4.mp3"}, {"en":"yeah, nah","ko":"아니 (거절)","audio":"audio/12bc958979.mp3"}, {"en":"nah, yeah","ko":"응 (긍정)","audio":"audio/7c45913b28.mp3"}, {"en":"no worries / no dramas / too easy","ko":"괜찮아요 / 문제없어요","audio":"audio/2a6a524296.mp3"}, {"en":"good on ya","ko":"잘했어요 / 좋네요","audio":"audio/e0093a92f8.mp3"}, {"en":"you right?","ko":"도와드릴까요?","audio":"audio/f8adc30b76.mp3"}, {"en":"love / dear / mate","ko":"친근한 호칭 (중년·어르신이 love·dear)","audio":"audio/8eb4f0e969.mp3"}, {"en":"fresh","ko":"쌀쌀한","audio":"audio/e8542ef54f.mp3"}, {"en":"stinker","ko":"엄청 더운 날","audio":"audio/646ae6b72f.mp3"}, {"en":"Maccas","ko":"맥도날드","audio":"audio/e449636fbf.mp3"}, {"en":"servo","ko":"주유소","audio":"audio/88aafa8aed.mp3"}, {"en":"bottle-o","ko":"주류 판매점","audio":"audio/3b598f3b25.mp3"}, {"en":"chemist","ko":"약국","audio":"audio/7af479baef.mp3"}, {"en":"thongs","ko":"슬리퍼","audio":"audio/605678d8dd.mp3"}, {"en":"sunnies","ko":"선글라스","audio":"audio/ba2e704f58.mp3"}, {"en":"swimmers / cossie","ko":"수영복","audio":"audio/a22a47ea75.mp3"}, {"en":"esky","ko":"아이스박스","audio":"audio/02b2db9ecd.mp3"}, {"en":"entrée","ko":"애피타이저 (메인 아님)","audio":"audio/2983eae7f3.mp3"}], "videos": [{"title":"How To Start a Conversation in Australia","ch":"mmmEnglish (호주인 Emma)","len":"약 12분","lang":"영어","url":"https://www.youtube.com/watch?v=Wf1XtPyvknQ","why":"택시·우버, 마트, 길 묻기, 사진 부탁을 따라 말하기로 연습. 1·2장과 짝.","when":"10/28"}, {"title":"How to Order Coffee in Australia","ch":"Learn Australian English (Jack & Liz)","len":"약 8분","lang":"영어","url":"https://www.youtube.com/watch?v=Z6dPFKzg2QQ","why":"'Have here or takeaway?'처럼 카페에서 듣는 말 그대로. 4장과 짝.","when":"10/29"}, {"title":"호주 현지 카페사장님이 알려주는 카푸치노·플랫화이트·롱블랙 차이","ch":"안스타 (한국어)","len":"약 10분","lang":"한국어","url":"https://www.youtube.com/watch?v=s-vnVkOaYvE","why":"롱블랙 vs 아메리카노, 플랫화이트 vs 라떼를 한국어로.","when":"10/29"}, {"title":"28 Australian Slang Words/Phrases","ch":"Welcome To Australia (거리 인터뷰)","len":"약 6분","lang":"영어","url":"https://www.youtube.com/watch?v=RJ8ibvD2W6U","why":"20대부터 중년까지 진짜 호주 사람들 목소리. 화자별 억양 차이 듣기에 최고.","when":"10/30"}, {"title":"Australian English Conversation Practice – Slang I Use Every Day","ch":"mmmEnglish","len":"약 15분","lang":"영어","url":"https://www.youtube.com/watch?v=jrc8MAWVp1w","why":"일상 대화 속 슬랭을 상황극으로.","when":"11/2 기내"}, {"title":"50 Australian Words You Should Learn Your First Week","ch":"Kinda Australian (시드니 거주 미국인)","len":"약 11분","lang":"영어","url":"https://www.youtube.com/watch?v=5C7bk_ydt-w","why":"시드니에 처음 온 외국인이 헷갈리는 말 위주. 2026년 영상.","when":"11/2 기내"}], "plan": [["10/28 (수)","0~2장 + 영상 1 · MP3 01~03","15분"], ["10/29 (목)","4장 음식 + 영상 2·3 · MP3 05 · 둘이 점원/손님 역할 바꿔보기","15분"], ["10/30 (금)","3장 쇼핑 + 영상 4 · MP3 04","10분"], ["10/31 (토)","결혼식! 쉬기","—"], ["11/1 (일)","5장 일정 장면 · MP3 06","10분"], ["11/2 (월)","기내: 영상 5·6 + 전체 듣기 MP3 한 번","30분"]]}</script>
+<script>/* Page behaviors for Hark's component library: the nav, the theme toggle, tables, line charts and images. style-gates: data */
+(function () {
+"use strict";
+var doc = document, root = doc.documentElement;
+root.classList.add("js");
+var LOGO = '<svg width="SIZE" height="SIZE" viewBox="0 0 36 36" fill="none" aria-hidden="true"><path fill="currentColor" d="M25.096 30c-.072 0-.12-.048-.168-.12-4.776-6.384-12.216-10.8-20.736-11.688C4.048 18.168 4 18.096 4 18s.048-.168.192-.192c8.52-.888 15.96-5.304 20.736-11.688.048-.072.096-.12.168-.12s.096.024.168.072A15.02 15.02 0 0 1 31.12 18a15.02 15.02 0 0 1-5.856 11.928c-.072.048-.096.072-.168.072"/></svg>';
+function esc(s) {
+return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+return { "&":"&amp;","<":"&lt;",">":"&gt;", '"': "&quot;" }[c];
+});
+}
+function each(a, f) { return (a || []).map(f).join(""); }
+function pad2(n) { return (n < 10 ? "0" : "") + n; }
+function niceBounds(vals) {
+var lo = Math.min.apply(null, vals), hi = Math.max.apply(null, vals);
+var step = Math.pow(10, Math.floor(Math.log10(Math.max(hi - lo, 1e-9))));
+lo = Math.floor(lo / step) * step; hi = Math.ceil(hi / step) * step;
+return hi === lo ? [lo - step, hi + step] : [lo, hi];
+}
+function fmtNum(v) { return Number(v).toLocaleString("en-US", { maximumFractionDigits: 2 }); }
+function chartSVG(pts, opt, W) {
+W = Math.max(320, Math.round(W || 960));
+var L = 40, R = W - 40, T = 30, Bt = 210;
+var stagger = pts.length > 1 && (R - L) / (pts.length - 1) < 96;
+var nameY = function (i) { return 236 + (stagger && i % 2 ? 16 : 0); };
+var valueY = function (i, py) { return stagger && i % 2 ? Math.min(py + 22, Bt - 4) : py - 13; };
+var H = (opt.numbered ? 268 : 248) + (stagger ? 16 : 0);
+var bounds = niceBounds(pts.length ? pts.map(function (p) { return +p[1]; }) : [0, 1]), lo = bounds[0], hi = bounds[1];
+var x = function (i) { return L + (R - L) * (pts.length < 2 ? 0.5 : i / (pts.length - 1)); };
+var y = function (v) { return Bt - (Bt - T) * (v - lo) / (hi - lo || 1); };
+var unit = opt.unit ? " " + opt.unit : "";
+var line = pts.map(function (p, i) { return (i ? "L" : "M") + x(i).toFixed(1) + "," + y(p[1]).toFixed(1); }).join(" ");
+var svg = '<g class="pf-grid">' + [30, 120, 210].map(function (gy) { return '<line x1="' + L + '" y1="' + gy + '" x2="' + R + '" y2="' + gy + '"></line>'; }).join("") + "</g>" +
+'<text class="pf-axis" x="0" y="34">' + fmtNum(hi) + '</text><text class="pf-axis" x="0" y="124">' + fmtNum((lo + hi) / 2) + '</text><text class="pf-axis" x="0" y="214">' + fmtNum(lo) + "</text>" +
+'<path class="pf-fill" d="' + line + " L" + R + "," + Bt + " L" + L + "," + Bt + ' Z"></path><path class="pf-line" d="' + line + '"></path>';
+pts.forEach(function (p, i) {
+var anchor = i === 0 ? ' text-anchor="start"' : i === pts.length - 1 ? ' text-anchor="end"' : "";
+svg += '<circle class="pf-dot" cx="' + x(i) + '" cy="' + y(p[1]) + '" r="4.5"></circle>' +
+'<text class="pf-alt" x="' + x(i) + '" y="' + valueY(i, y(p[1])) + '"' + anchor + ">" + esc(fmtNum(p[1]) + unit) + "</text>" +
+'<text class="pf-name" x="' + x(i) + '" y="' + nameY(i) + '"' + anchor + ">" + esc(p[0]) + "</text>";
+if (i && opt.numbered) svg += '<text class="pf-num" x="' + ((x(i - 1) + x(i)) / 2) + '" y="' + (H - 10) + '">' + pad2(i) + "</text>";
+});
+return ((opt.caption ? '<p class="chart__cap">' + esc(opt.caption) + "</p>" : "") +
+'<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(opt.label || opt.caption || "Line chart") + '">' + svg + "</svg>");
+}
+function contentWidth(el) {
+var cs = getComputedStyle(el);
+return el.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+}
+function drawCharts() {
+[].slice.call(doc.querySelectorAll(".chart[data-points]")).forEach(function (p) {
+var pts = p.getAttribute("data-points").split(",").map(function (x) { var m = x.split(":"); return [m[0].trim(), +m[1]]; });
+p.innerHTML = chartSVG(pts, { caption: p.getAttribute("data-caption"), unit: p.getAttribute("data-unit"),
+label: p.getAttribute("aria-label"), numbered: p.hasAttribute("data-numbered") }, contentWidth(p));
+});
+}
+function autoNav() {
+var sections = [].slice.call(doc.querySelectorAll("section[data-nav]"));
+var header = doc.querySelector("header.nav[data-auto]");
+if (header) {
+header.innerHTML = '<nav class="seg" aria-label="Sections">' +
+each(sections, function (s) { return '<a href="#' + esc(s.id) + '">' + esc(s.getAttribute("data-nav")) + "</a>"; }) + "</nav>" +
+'<button class="theme-btn" id="theme-btn" type="button" aria-label="Switch to dark theme"></button>';
+}
+[].slice.call(doc.querySelectorAll(".foot nav[data-auto]")).forEach(function (n) {
+n.innerHTML = '<a href="#top">Top</a>' + each(sections, function (s) { return '<a href="#' + esc(s.id) + '">' + esc(s.getAttribute("data-nav")) + "</a>"; });
+});
+drawCharts();
+window.addEventListener("resize", function () { clearTimeout(drawCharts.t); drawCharts.t = setTimeout(drawCharts, 150); }, { passive: true });
+[].slice.call(doc.querySelectorAll(".table-wrap table")).forEach(function (t) {
+var names = [].map.call(t.querySelectorAll("thead th"), function (th) { return th.textContent.trim(); });
+[].slice.call(t.querySelectorAll("tbody tr")).forEach(function (tr) {
+[].slice.call(tr.children).forEach(function (c, i) {
+if (c.tagName !== "TD") return;
+if (!c.textContent.trim() && !c.querySelector("img, svg")) c.classList.add("is-empty");
+else if (names[i] && !c.hasAttribute("data-label")) c.setAttribute("data-label", names[i]);
+});
+});
+});
+[].slice.call(doc.querySelectorAll(".compare table")).forEach(function (t) {
+t.parentNode.style.setProperty("--compare-cols", t.querySelectorAll("thead th").length);
+[].slice.call(t.querySelectorAll(".compare__media .chip")).forEach(function (chip) {
+chip.closest("th").appendChild(chip);
+});
+[].slice.call(t.querySelectorAll("tbody tr")).forEach(function (tr) {
+var head = tr.querySelector("th"), label = head ? head.textContent.trim() : "";
+[].slice.call(tr.querySelectorAll("td")).forEach(function (td) {
+if (label && !td.hasAttribute("data-label")) td.setAttribute("data-label", label);
+});
+});
+});
+[].slice.call(doc.querySelectorAll(".step__figure img, .band img")).forEach(function (im) {
+var mark = function () { if (im.naturalHeight > im.naturalWidth) im.parentNode.classList.add("is-portrait"); };
+if (im.complete) mark(); else im.addEventListener("load", mark);
+});
+[].slice.call(doc.querySelectorAll(".hark-mark:empty")).forEach(function (m) { m.innerHTML = LOGO.replace(/SIZE/g, m.getAttribute("data-size") || "20"); });
+}
+function behaviors() {
+var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var btn = doc.getElementById("theme-btn"), mq = window.matchMedia("(prefers-color-scheme: dark)");
+try { var saved = localStorage.getItem("hark-theme"); if (saved === "light" || saved === "dark") root.setAttribute("data-theme", saved); } catch (e) { /* storage blocked: follow the system theme */ }
+function current() { var t = root.getAttribute("data-theme"); return t === "light" || t === "dark" ? t : (mq.matches ? "dark" : "light"); }
+function label() { if (btn) btn.setAttribute("aria-label", current() === "dark" ? "Switch to light theme" : "Switch to dark theme"); }
+if (btn) btn.addEventListener("click", function () {
+var next = current() === "dark" ? "light" : "dark";
+root.setAttribute("data-theme", next);
+try { localStorage.setItem("hark-theme", next); } catch (e) { /* storage blocked: the choice lasts this visit */ }
+label();
+});
+label();
+var seg = doc.querySelector(".seg");
+if (seg) {
+var links = [].slice.call(seg.querySelectorAll("a"));
+var targets = links.map(function (a) { return doc.getElementById(a.getAttribute("href").slice(1)); });
+var active = -2;
+var reveal = function (i) {
+if (i < 0) return;
+var a = links[i];
+var l = a.offsetLeft - 8, r = a.offsetLeft + a.offsetWidth + 8;
+if (l < seg.scrollLeft || r > seg.scrollLeft + seg.clientWidth) seg.scrollTo({ left: l, behavior: reduce ? "auto" : "smooth" });
+};
+var sync = function (force) {
+var line = window.innerHeight * 0.32, cur = -1;
+targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top <= line) cur = i; });
+if (cur === active && !force) return;
+active = cur;
+links.forEach(function (a, i) { if (i === cur) a.setAttribute("aria-current","true"); else a.removeAttribute("aria-current"); });
+reveal(cur);
+};
+var ticking = false;
+window.addEventListener("scroll", function () {
+if (ticking) return; ticking = true;
+window.requestAnimationFrame(function () { sync(false); ticking = false; });
+}, { passive: true });
+window.addEventListener("resize", function () { sync(true); }, { passive: true });
+if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { sync(true); });
+sync(true);
+}
+[].slice.call(doc.querySelectorAll(".chart")).forEach(function (chart) {
+if (reduce || !("IntersectionObserver" in window)) { chart.classList.add("is-in"); return; }
+var io = new IntersectionObserver(function (entries) {
+entries.forEach(function (e) { if (e.isIntersecting) { chart.classList.add("is-in"); io.disconnect(); } });
+}, { threshold: 0.3 });
+io.observe(chart);
+});
+}
+function start() {
+autoNav();
+behaviors();
+}
+if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", start);
+else start();
+})();
+</script>
+<script>
+(function () {
+var D = JSON.parse(document.getElementById("lessons").textContent);
+var clips = [];
+function clip(src) { clips.push(src); return clips.length - 1; }
+function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&":"&amp;","<":"&lt;",">":"&gt;", '"': "&quot;" }[c]; }); }
+function spk(key) { var k = String(key || ""); return k.indexOf("WH") === 0 ? "wh" : k.toLowerCase(); }
+function lineHTML(h) {
+return '<div class="x-line" role="button" tabindex="0" data-clip="' + clip(h.audio) + '" aria-label="' + esc(h.en) + ' 듣기">' +
+'<span class="x-play" aria-hidden="true">▶</span><div>' +
+'<span class="x-spk x-spk--' + spk(h.speaker) + '">' + esc(h.speaker_label) + "</span>" +
+'<p class="x-en">' + esc(h.en) + '</p><p class="x-ko">' + esc(h.ko) + "</p></div></div>";
+}
+function sayHTML(s) {
+var i = clip(s.audio);
+return '<div class="x-say" data-clip="' + i + '"><p class="x-say__label">내가 할 말</p>' +
+'<p class="x-say__en" role="button" tabindex="0" data-act="say">' + esc(s.en) + "</p>" +
+'<p class="x-ko">' + esc(s.ko) + "</p>" +
+(s.tip ? '<p class="x-say__tip">💡 ' + esc(s.tip) + "</p>" : "") +
+'<div class="links"><button class="btn" type="button" data-act="say">▶ 듣기</button>' +
+'<button class="btn" type="button" data-act="repeat">🔁 따라 하기</button></div></div>';
+}
+function unitHTML(u) {
+var hears = '<div class="x-lines">' + u.hear.map(lineHTML).join("") + "</div>";
+var body = u.order === "they"
+? '<p class="x-label">상대가 먼저 이렇게 말해요</p>' + hears + sayHTML(u.speak)
+: sayHTML(u.speak) + '<p class="x-label">대답은 이렇게 와요</p>' + hears;
+return '<article class="x-unit" data-order="' + esc(u.order) + '"><h3>' + esc(u.situation) + "</h3>" + body +
+'<div class="links"><button class="btn" type="button" data-act="all">▶ 전체 듣기</button></div></article>';
+}
+document.getElementById("lesson-sections").innerHTML = D.sections.map(function (s) {
+return '<section class="section" id="s' + esc(s.num) + '" data-nav="' + esc(s.num) + '장"><div class="head">' +
+'<p class="head__eyebrow">' + esc(s.num) + "장</p><h2>" + esc(s.title) + "</h2>" +
+'<p class="head__sub">' + esc(s.lead) + '</p></div><div class="x-units">' + s.units.map(unitHTML).join("") + "</div></section>";
+}).join("");
+var labelKey = {};
+Object.keys(D.speakers || {}).forEach(function (k) { if (!labelKey[D.speakers[k]]) labelKey[D.speakers[k]] = k; });
+document.getElementById("speaker-cards").innerHTML = D.speaker_notes.map(function (n) {
+var key = labelKey[n[0]] || (n[0].indexOf("워홀러") === 0 ? "WH" : "");
+return '<div><h3><span class="x-spk x-spk--' + spk(key) + '">' + esc(n[0]) + "</span></h3><p>" + esc(n[1]) + "</p></div>";
+}).join("");
+document.getElementById("word-grid").innerHTML = D.hear_words.map(function (w) {
+return '<button class="x-word" type="button" data-clip="' + clip(w.audio) + '"><b>' + esc(w.en) + '</b><span class="x-ko">' + esc(w.ko) + "</span></button>";
+}).join("");
+document.getElementById("video-cards").innerHTML = D.videos.map(function (v) {
+return "<div><h3>" + esc(v.title) + '</h3><p class="x-meta">' + esc(v.ch) + "</p>" +
+'<p class="x-pills"><span class="pill">' + esc(v.len) + '</span><span class="pill">' + esc(v.lang) + '</span><span class="pill">보는 날 ' + esc(v.when) + "</span></p>" +
+"<p>" + esc(v.why) + '</p><div class="links"><a class="btn" href="' + esc(v.url) + '" target="_blank" rel="noopener">영상 보기</a></div></div>';
+}).join("");
+document.getElementById("plan-rows").innerHTML = D.plan.map(function (p) {
+return '<tr><th scope="row">' + esc(p[0]) + "</th><td>" + esc(p[1]) + '</td><td class="num">' + esc(p[2]) + "</td></tr>";
+}).join("");
+/* ---------- player: one audio at a time ---------- */
+var audio = new Audio();
+audio.preload = "auto";
+var rate = 1, token = 0, current = null, pending = null, timer = null;
+function mark(el) {
+if (current) current.classList.remove("is-playing");
+current = el || null;
+if (current) current.classList.add("is-playing");
+}
+function finish(ok) { var r = pending; pending = null; mark(null); if (r) r(ok); }
+function playClip(i, el, t) {
+return new Promise(function (res) {
+if (t !== token) return res(false);
+pending = res;
+audio.src = clips[i];
+audio.defaultPlaybackRate = rate;
+audio.playbackRate = rate;
+mark(el);
+var p = audio.play();
+if (p && p.catch) p.catch(function () { if (pending === res) finish(false); });
+});
+}
+audio.addEventListener("ended", function () { finish(true); });
+audio.addEventListener("error", function () { finish(true); });
+function wait(ms, t) {
+return new Promise(function (res) {
+timer = setTimeout(function () { res(t === token); }, ms / rate);
+});
+}
+function stop() {
+token++;
+clearTimeout(timer);
+audio.pause();
+finish(false);
+setPlaying(false);
+}
+function setPlaying(on) {
+[].forEach.call(document.querySelectorAll('[data-act="stop"]'), function (b) { b.disabled = !on; });
+}
+function run(items) {
+stop();
+var t = token;
+setPlaying(true);
+(function next(k) {
+if (t !== token) return;
+if (k >= items.length) return setPlaying(false);
+var it = items[k];
+(it.wait ? wait(it.wait, t) : playClip(it.i, it.el, t)).then(function (ok) {
+if (ok) next(k + 1);
+else if (t === token) setPlaying(false);
+});
+})(0);
+}
+function unitSequence(unit) {
+var say = unit.querySelector(".x-say");
+var lines = [].slice.call(unit.querySelectorAll(".x-line"));
+var hearItems = lines.map(function (el) { return { i: +el.dataset.clip, el: el }; });
+var sayItem = { i: +say.dataset.clip, el: say };
+var order = unit.dataset.order === "me" ? [sayItem].concat(hearItems) : hearItems.concat([sayItem]);
+var items = [];
+order.forEach(function (it, n) { if (n) items.push({ wait: 1000 }); items.push(it); });
+return items;
+}
+var hideKo = false;
+function setHideKo(on) {
+hideKo = on;
+document.body.classList.toggle("x-hide-ko", on);
+if (!on) [].forEach.call(document.querySelectorAll(".x-ko.is-shown"), function (e) { e.classList.remove("is-shown"); });
+[].forEach.call(document.querySelectorAll('[data-act="toggle-ko"]'), function (b) { b.setAttribute("aria-pressed", String(on)); });
+}
+function setRate(r) {
+rate = r;
+audio.defaultPlaybackRate = r;
+audio.playbackRate = r;
+[].forEach.call(document.querySelectorAll('[data-act="speed"]'), function (b) {
+b.setAttribute("aria-pressed", String(r !== 1));
+b.textContent = b.classList.contains("x-ctl") ? r + "x" : "속도 " + r + "x";
+});
+}
+function activate(target, e) {
+var ko = target.closest(".x-ko");
+if (ko && hideKo && !ko.classList.contains("is-shown")) { ko.classList.add("is-shown"); e.preventDefault(); return; }
+var act = target.closest("[data-act]");
+if (act) {
+var a = act.dataset.act;
+if (a === "toggle-ko") return setHideKo(!hideKo);
+if (a === "speed") return setRate(rate === 1 ? 0.8 : 1);
+if (a === "stop") return stop();
+if (a === "all") return run(unitSequence(act.closest(".x-unit")));
+var say = act.closest(".x-say");
+if (say) {
+var i = +say.dataset.clip;
+if (a === "say") return run([{ i: i, el: say }]);
+if (a === "repeat") return run([{ i: i, el: say }, { wait: 3000 }, { i: i, el: say }]);
+}
+}
+var el = target.closest(".x-line, .x-word");
+if (el) {
+if (el === current) return stop();
+run([{ i: +el.dataset.clip, el: el }]);
+}
+}
+document.addEventListener("click", function (e) { activate(e.target, e); });
+document.addEventListener("keydown", function (e) {
+if ((e.key === "Enter" || e.key === " ") && e.target.matches('.x-line, [role="button"]')) { e.preventDefault(); activate(e.target, e); }
+});
+/* after hark.js builds the nav, add speed, stop and the meaning toggle to it */
+function addControls() {
+var nav = document.querySelector("header.nav");
+if (!nav || nav.querySelector(".x-ctl")) return;
+var theme = nav.querySelector(".theme-btn");
+var html = '<button class="x-ctl" type="button" data-act="toggle-ko" aria-pressed="' + hideKo + '" aria-label="한국어 뜻 숨기기" title="한국어 뜻 숨기기">뜻</button>' +
+'<button class="x-ctl" type="button" data-act="speed" aria-pressed="' + (rate !== 1) + '" aria-label="재생 속도" title="재생 속도">' + rate + "x</button>" +
+'<button class="x-ctl" type="button" data-act="stop" aria-label="정지" title="정지"' + (pending ? "" : " disabled") + '>■</button>';
+if (theme) theme.insertAdjacentHTML("beforebegin", html);
+else nav.insertAdjacentHTML("beforeend", html);
+}
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addControls);
+else addControls();
+})();
+</script>
+</body></html>
