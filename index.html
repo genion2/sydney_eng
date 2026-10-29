@@ -708,6 +708,10 @@ button.btn { cursor: pointer; }
 .x-units { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 440px), 1fr)); gap: 16px; align-items: start; }
 .x-unit { display: grid; gap: 12px; padding: 20px; border-radius: var(--r-m); background: var(--fill-tertiary); min-width: 0; }
 .x-unit h3 { font: var(--type-heading); }
+.x-unit__media { position: relative; height: clamp(140px, 22vw, 180px); margin: -20px -20px 0; border-radius: var(--r-m) var(--r-m) 0 0; overflow: hidden; background: var(--fill-secondary); isolation: isolate; }
+.x-unit__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.x-unit__media::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to top, rgb(0 0 0 / 0.68) 0%, rgb(0 0 0 / 0.25) 45%, transparent 75%); }
+.x-unit__media h3 { position: absolute; left: 20px; right: 20px; bottom: 14px; color: #fff; text-shadow: 0 1px 8px rgb(0 0 0 / 0.45); }
 .x-label { font: var(--type-label); color: var(--text-secondary); margin-top: 4px; }
 .x-lines { display: grid; gap: 6px; }
 .x-line { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 10px; align-items: start; padding: 10px 12px; border-radius: var(--r-s); background: var(--fill-primary-on); cursor: pointer; min-height: var(--tap); transition: box-shadow var(--dur-quick) ease; }
@@ -725,10 +729,12 @@ button.btn { cursor: pointer; }
 .x-say .x-ko { color: var(--text-secondary-on); font: var(--type-body); }
 .x-say__tip { font: var(--type-small); color: var(--text-secondary-on); padding-top: 8px; border-top: 1px solid var(--stroke-primary-on); margin-top: 4px; }
 .x-say .links { margin-top: 6px; }
-.x-words { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 8px; }
+.x-words { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 8px; }
 .x-word { display: grid; gap: 2px; text-align: left; padding: 12px 14px; border: 0; border-radius: var(--r-s); background: var(--fill-tertiary); color: var(--text-primary); cursor: pointer; min-height: var(--tap); }
 .x-word:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
 .x-word b { font: var(--type-body-strong); }
+.x-ex { display: block; margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--stroke-secondary); font: var(--type-small); font-style: italic; color: var(--text-primary); }
+.x-word .x-ex-ko { font: var(--type-caption); }
 .x-word b::before { content: "▶ "; font-size: var(--size-caption); color: var(--text-secondary); }
 .x-meta { font: var(--type-small); color: var(--text-secondary); margin-bottom: 8px; }
 .cards .x-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
@@ -768,7 +774,7 @@ button.btn { cursor: pointer; }
 </div>
 <div class="cards" id="speaker-cards"></div>
 </section>
-<section class="section" id="words" data-nav="단어">
+<section class="section" id="words" data-nav="들리는 말">
 <div class="head">
 <h2>귀로 익힐 호주 말</h2>
 <p class="head__sub">말할 필요는 없어요. 들리면 알아채기만 하면 돼요. 누르면 들려요.</p>
@@ -933,8 +939,9 @@ var active = -2;
 var reveal = function (i) {
 if (i < 0) return;
 var a = links[i];
-var l = a.offsetLeft - 8, r = a.offsetLeft + a.offsetWidth + 8;
-if (l < seg.scrollLeft || r > seg.scrollLeft + seg.clientWidth) seg.scrollTo({ left: l, behavior: reduce ? "auto" : "smooth" });
+var off = a.getBoundingClientRect().left - seg.getBoundingClientRect().left + seg.scrollLeft;
+var l = off - 8, r = off + a.offsetWidth + 8;
+if (l < seg.scrollLeft || r > seg.scrollLeft + seg.clientWidth) seg.scrollTo({ left: Math.max(0, off - (seg.clientWidth - a.offsetWidth) / 2), behavior: reduce ? "auto" : "smooth" });
 };
 var sync = function (force) {
 var line = window.innerHeight * 0.32, cur = -1;
@@ -996,12 +1003,15 @@ var hears = '<div class="x-lines">' + u.hear.map(lineHTML).join("") + "</div>";
 var body = u.order === "they"
 ? '<p class="x-label">상대가 먼저 이렇게 말해요</p>' + hears + sayHTML(u.speak)
 : sayHTML(u.speak) + '<p class="x-label">대답은 이렇게 와요</p>' + hears;
-return '<article class="x-unit" data-order="' + esc(u.order) + '"><h3>' + esc(u.situation) + "</h3>" + body +
+var head = u.img
+? '<div class="x-unit__media"><img src="' + esc(u.img) + '" alt="" loading="lazy" decoding="async"/><h3>' + esc(u.situation) + "</h3></div>"
+: "<h3>" + esc(u.situation) + "</h3>";
+return '<article class="x-unit" data-order="' + esc(u.order) + '">' + head + body +
 '<div class="links"><button class="btn" type="button" data-act="all">▶ 전체 듣기</button></div></article>';
 }
 document.getElementById("lesson-sections").innerHTML = D.sections.map(function (s) {
-return '<section class="section" id="s' + esc(s.num) + '" data-nav="' + esc(s.num) + '장"><div class="head">' +
-'<p class="head__eyebrow">' + esc(s.num) + "장</p><h2>" + esc(s.title) + "</h2>" +
+return '<section class="section" id="s' + esc(s.num) + '" data-nav="' + esc(s.num) + " " + esc(s.short || "") + '"><div class="head">' +
+'<p class="head__eyebrow">' + esc(s.num) + "장 · " + esc(s.short || "") + "</p><h2>" + esc(s.title) + "</h2>" +
 '<p class="head__sub">' + esc(s.lead) + '</p></div><div class="x-units">' + s.units.map(unitHTML).join("") + "</div></section>";
 }).join("");
 var labelKey = {};
@@ -1011,7 +1021,9 @@ var key = n[0].indexOf("인도") >= 0 ? "IN" : (labelKey[n[0]] || (n[0].indexOf(
 return '<div><h3><span class="x-spk x-spk--' + spk(key) + '">' + esc(n[0]) + "</span></h3><p>" + esc(n[1]) + "</p></div>";
 }).join("");
 document.getElementById("word-grid").innerHTML = D.hear_words.map(function (w) {
-return '<button class="x-word" type="button" data-clip="' + clip(w.audio) + '"><b>' + esc(w.en) + '</b><span class="x-ko">' + esc(w.ko) + "</span></button>";
+return '<button class="x-word" type="button" data-clip="' + clip(w.audio) + '"><b>' + esc(w.en) + '</b><span class="x-ko">' + esc(w.ko) + "</span>" +
+(w.ex_en ? '<span class="x-ex" lang="en">' + esc(w.ex_en) + "</span>" : "") +
+(w.ex_ko ? '<span class="x-ko x-ex-ko">' + esc(w.ex_ko) + "</span>" : "") + "</button>";
 }).join("");
 document.getElementById("tip-cards").innerHTML = (D.tips || []).map(function (t) {
 return "<div><h3>" + esc(t.title) + "</h3><p>" + esc(t.text) + "</p></div>";
