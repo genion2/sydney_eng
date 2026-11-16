@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>인천-로마 시차적응 생체리듬 조절표 (본인 / 배우자)</title>
+  <title>인천-로마 시차적응 생체리듬 조절표 (본인 / 배우자 기준)</title>
   <style>
     * {
       box-sizing: border-box;
@@ -29,7 +29,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1100px;
+      min-width: 1120px;
       font-size: 13.5px;
     }
     thead th {
@@ -46,12 +46,13 @@
       color: #ffffff;
       width: 14%;
     }
-    .th-kst-group {
-      background-color: #1d4ed8;
+    .th-self-group {
+      background-color: #0f766e;
       color: #ffffff;
+      border-right: 2px solid #64748b;
     }
-    .th-cet-group {
-      background-color: #b45309;
+    .th-spouse-group {
+      background-color: #4338ca;
       color: #ffffff;
     }
     .th-kst-sub {
@@ -63,6 +64,9 @@
       background-color: #fef3c7;
       color: #78350f;
       width: 21.5%;
+    }
+    .group-divider {
+      border-right: 2px solid #64748b !important;
     }
     tbody td {
       padding: 12px 14px;
@@ -125,6 +129,10 @@
       color: #b91c1c;
       font-weight: 700;
     }
+    .accent-sun {
+      color: #0369a1;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
@@ -133,14 +141,14 @@
       <thead>
         <tr>
           <th class="th-stage" rowspan="2">단계 및 기간</th>
-          <th class="th-kst-group" colspan="2">KST (한국 시각, UTC+9)</th>
-          <th class="th-cet-group" colspan="2">CET (로마 시각, UTC+1)</th>
+          <th class="th-self-group" colspan="2">본인</th>
+          <th class="th-spouse-group" colspan="2">배우자</th>
         </tr>
         <tr>
-          <th class="th-kst-sub">본인</th>
-          <th class="th-kst-sub">배우자</th>
-          <th class="th-cet-sub">본인</th>
-          <th class="th-cet-sub">배우자</th>
+          <th class="th-kst-sub">KST (한국 시각, UTC+9)</th>
+          <th class="th-cet-sub group-divider">CET (로마 시각, UTC+1)</th>
+          <th class="th-kst-sub">KST (한국 시각, UTC+9)</th>
+          <th class="th-cet-sub">CET (로마 시각, UTC+1)</th>
         </tr>
       </thead>
       <tbody>
@@ -157,20 +165,20 @@
               <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">11:00</span></li>
             </ul>
           </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> 15:00 / 매일 23:00</li>
+              <li><span class="label">빛 차단:</span> 23:00 이전</li>
+              <li><span class="label">빛 노출:</span> 11:00~14:00</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">03:00</span></li>
+            </ul>
+          </td>
           <td>
             <ul>
               <li><span class="label">취침 / 기상:</span> 23:00 / 07:30~08:00</li>
               <li><span class="label">빛 차단:</span> 07:30 이전</li>
               <li><span class="label">빛 노출:</span> 19:00~22:00</li>
               <li><span class="label">카페인 / 낮잠:</span> <span class="accent-caffeine">11:00</span> 마감 / 15:00 전 30~60분 이내</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 15:00 / 매일 23:00</li>
-              <li><span class="label">빛 차단:</span> 23:00 이전</li>
-              <li><span class="label">빛 노출:</span> 11:00~14:00</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">03:00</span></li>
             </ul>
           </td>
           <td>
@@ -196,20 +204,20 @@
               <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">11:30</span></li>
             </ul>
           </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> 15:30 / 23:30 (<span class="accent-pt">화 23:00</span>)</li>
+              <li><span class="label">빛 차단:</span> 23:30 이전</li>
+              <li><span class="label">빛 노출:</span> 11:30~14:30</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">03:30</span></li>
+            </ul>
+          </td>
           <td>
             <ul>
               <li><span class="label">취침 / 기상:</span> 23:30 / 08:00~08:30</li>
               <li><span class="label">빛 차단:</span> 08:00 이전</li>
               <li><span class="label">빛 노출:</span> 19:30~22:30</li>
               <li><span class="label">카페인 / 낮잠:</span> <span class="accent-caffeine">11:30</span> 마감 / 15:00 전 30~60분 이내</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 15:30 / 23:30 (<span class="accent-pt">화 23:00</span>)</li>
-              <li><span class="label">빛 차단:</span> 23:30 이전</li>
-              <li><span class="label">빛 노출:</span> 11:30~14:30</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">03:30</span></li>
             </ul>
           </td>
           <td>
@@ -235,20 +243,20 @@
               <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">12:00</span></li>
             </ul>
           </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> 16:00 / 00:00 (<span class="accent-pt">목 23:00</span>)</li>
+              <li><span class="label">빛 차단:</span> 00:00 이전</li>
+              <li><span class="label">빛 노출:</span> 12:00~15:00</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">04:00</span></li>
+            </ul>
+          </td>
           <td>
             <ul>
               <li><span class="label">취침 / 기상:</span> 00:00 / 08:30~09:00</li>
               <li><span class="label">빛 차단:</span> 08:30 이전</li>
               <li><span class="label">빛 노출:</span> 20:00~23:00</li>
               <li><span class="label">카페인 / 낮잠:</span> <span class="accent-caffeine">12:00</span> 마감 / 15:00 전 30~60분 이내</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 16:00 / 00:00 (<span class="accent-pt">목 23:00</span>)</li>
-              <li><span class="label">빛 차단:</span> 00:00 이전</li>
-              <li><span class="label">빛 노출:</span> 12:00~15:00</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">04:00</span></li>
             </ul>
           </td>
           <td>
@@ -274,20 +282,20 @@
               <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">12:30</span></li>
             </ul>
           </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> 16:30 / 00:30 (<span class="accent-pt">화·목 23:00</span>)</li>
+              <li><span class="label">빛 차단:</span> 00:30 이전</li>
+              <li><span class="label">빛 노출:</span> 12:30~15:30</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">04:30</span></li>
+            </ul>
+          </td>
           <td>
             <ul>
               <li><span class="label">취침 / 기상:</span> 00:30 / 09:00~09:30</li>
               <li><span class="label">빛 차단:</span> 09:00 이전</li>
               <li><span class="label">빛 노출:</span> 20:30~23:30</li>
               <li><span class="label">카페인 / 낮잠:</span> <span class="accent-caffeine">12:30</span> 마감 / 15:00 전 30~60분 이내</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 16:30 / 00:30 (<span class="accent-pt">화·목 23:00</span>)</li>
-              <li><span class="label">빛 차단:</span> 00:30 이전</li>
-              <li><span class="label">빛 노출:</span> 12:30~15:30</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">04:30</span></li>
             </ul>
           </td>
           <td>
@@ -313,20 +321,20 @@
               <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">13:00</span></li>
             </ul>
           </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> 17:00 / 01:00 (<span class="accent-pt">화·목 23:00</span>)</li>
+              <li><span class="label">빛 차단:</span> 01:00 이전</li>
+              <li><span class="label">빛 노출:</span> 13:00~16:00</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">05:00</span></li>
+            </ul>
+          </td>
           <td>
             <ul>
               <li><span class="label">취침 / 기상:</span> 01:00 / 09:30~10:00</li>
               <li><span class="label">빛 차단:</span> 09:30 이전</li>
               <li><span class="label">빛 노출:</span> 21:00~00:00</li>
               <li><span class="label">카페인 / 낮잠:</span> <span class="accent-caffeine">13:00</span> 마감 / 15:00 전 30~60분 이내</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 17:00 / 01:00 (<span class="accent-pt">화·목 23:00</span>)</li>
-              <li><span class="label">빛 차단:</span> 01:00 이전</li>
-              <li><span class="label">빛 노출:</span> 13:00~16:00</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">05:00</span></li>
             </ul>
           </td>
           <td>
@@ -352,20 +360,20 @@
               <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">13:30</span></li>
             </ul>
           </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> 17:30 / 01:30</li>
+              <li><span class="label">빛 차단:</span> 01:30 이전</li>
+              <li><span class="label">빛 노출:</span> 13:30~16:30</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">05:30</span></li>
+            </ul>
+          </td>
           <td>
             <ul>
               <li><span class="label">취침 / 기상:</span> 01:30 / 10:00~10:30</li>
               <li><span class="label">빛 차단:</span> 10:00 이전</li>
               <li><span class="label">빛 노출:</span> 21:30~00:30</li>
               <li><span class="label">카페인 / 낮잠:</span> <span class="accent-caffeine">13:30</span> 마감 / 15:00 전 30~60분 이내</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 17:30 / 01:30</li>
-              <li><span class="label">빛 차단:</span> 01:30 이전</li>
-              <li><span class="label">빛 노출:</span> 13:30~16:30</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">05:30</span></li>
             </ul>
           </td>
           <td>
@@ -390,8 +398,19 @@
               <li><span class="label">이륙 / 착륙:</span> 14:05 / 03:35(12/16)</li>
               <li><span class="label">기내 수면:</span> 금지 (18:00 전 20분 이내 쪽잠만 허용)</li>
               <li><span class="label">기내 빛 노출:</span> 14:05~22:00</li>
-              <li><span class="label">착륙 후 차단:</span> 03:35(12/16) 이후</li>
-              <li><span class="label">현지 취침:</span> 06:30(12/16)</li>
+              <li><span class="label">착륙 후 동선:</span> 입국·체크인 후 가벼운 식사, 06:00부터 소등</li>
+              <li><span class="label">현지 취침:</span> <strong>07:30(12/16)</strong></li>
+            </ul>
+          </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">기상 (12/15):</span> 01:30</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">06:00</span> (기내 금지)</li>
+              <li><span class="label">이륙 / 착륙:</span> 06:05 / 19:35(12/15)</li>
+              <li><span class="label">기내 수면:</span> 금지 (10:00 전 20분 이내 쪽잠만 허용)</li>
+              <li><span class="label">기내 빛 노출:</span> 06:05~14:00</li>
+              <li><span class="label">착륙 후 동선:</span> 입국·체크인 후 가벼운 식사, 22:00부터 소등</li>
+              <li><span class="label">현지 취침:</span> <strong>23:30(12/15)</strong></li>
             </ul>
           </td>
           <td>
@@ -401,19 +420,8 @@
               <li><span class="label">이륙 / 착륙:</span> 14:05 / 03:35(12/16)</li>
               <li><span class="label">기내 수면:</span> <span class="accent-sleep">15:30~18:30 (2~3시간 필수)</span></li>
               <li><span class="label">기내 빛 노출:</span> 18:30~23:00</li>
-              <li><span class="label">착륙 후 차단:</span> 03:35(12/16) 이후</li>
-              <li><span class="label">현지 취침:</span> 06:30(12/16)</li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">기상 (12/15):</span> 01:30</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">06:00</span> (기내 금지)</li>
-              <li><span class="label">이륙 / 착륙:</span> 06:05 / 19:35(12/15)</li>
-              <li><span class="label">기내 수면:</span> 금지 (10:00 전 20분 이내 쪽잠만 허용)</li>
-              <li><span class="label">기내 빛 노출:</span> 06:05~14:00</li>
-              <li><span class="label">착륙 후 차단:</span> 19:35(12/15) 이후</li>
-              <li><span class="label">현지 취침:</span> 22:30(12/15)</li>
+              <li><span class="label">착륙 후 동선:</span> 입국·체크인 후 가벼운 식사, 06:00부터 소등</li>
+              <li><span class="label">현지 취침:</span> <strong>07:30(12/16)</strong></li>
             </ul>
           </td>
           <td>
@@ -423,47 +431,51 @@
               <li><span class="label">이륙 / 착륙:</span> 06:05 / 19:35(12/15)</li>
               <li><span class="label">기내 수면:</span> <span class="accent-sleep">07:30~10:30 (2~3시간 필수)</span></li>
               <li><span class="label">기내 빛 노출:</span> 10:30~15:00</li>
-              <li><span class="label">착륙 후 차단:</span> 19:35(12/15) 이후</li>
-              <li><span class="label">현지 취침:</span> 22:30(12/15)</li>
+              <li><span class="label">착륙 후 동선:</span> 입국·체크인 후 가벼운 식사, 22:00부터 소등</li>
+              <li><span class="label">현지 취침:</span> <strong>23:30(12/15)</strong></li>
             </ul>
           </td>
         </tr>
 
         <tr class="highlight-local">
           <td class="td-stage">
-            현지 고정<br>12/16(수) ~ 12/18(금)
-            <small>3일간 · 로마 체류 초기</small>
+            현지 고정<br>12/16(수) ~ 여행 기간
+            <small>로마 일출 ~07:34 / 일몰 ~16:41 CET</small>
           </td>
           <td>
             <ul>
-              <li><span class="label">취침 / 기상:</span> 06:30~07:00 / 15:00</li>
-              <li><span class="label">아침 야외 빛:</span> 15:30~17:30</li>
-              <li><span class="label">저녁 빛 차단:</span> 01:00 이후</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">18:30</span></li>
+              <li><span class="label">취침 / 기상:</span> 07:30~08:00 / 15:30~16:00</li>
+              <li><span class="label">아침 야외 빛:</span> <span class="accent-sun">16:00~18:30 (일출 후)</span></li>
+              <li><span class="label">야간 활동:</span> 05:30까지 마켓·식사 가능</li>
+              <li><span class="label">청색광 차단:</span> 06:00 이후</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">19:30</span></li>
+            </ul>
+          </td>
+          <td class="group-divider">
+            <ul>
+              <li><span class="label">취침 / 기상:</span> <strong>23:30~00:00 / 07:30~08:00</strong></li>
+              <li><span class="label">아침 야외 빛:</span> <span class="accent-sun">08:00~10:30 (일출 후)</span></li>
+              <li><span class="label">야간 활동:</span> <strong>21:30까지 마켓·식사 가능</strong></li>
+              <li><span class="label">청색광 차단:</span> 22:00 이후 (취침 90분 전)</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">11:30</span></li>
             </ul>
           </td>
           <td>
             <ul>
-              <li><span class="label">취침 / 기상:</span> 06:30~07:00 / 15:30~16:00</li>
-              <li><span class="label">아침 야외 빛:</span> 15:30~17:30</li>
-              <li><span class="label">저녁 빛 차단:</span> 01:00 이후</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">18:30</span></li>
+              <li><span class="label">취침 / 기상:</span> 07:30~08:00 / 16:00~16:30</li>
+              <li><span class="label">아침 야외 빛:</span> <span class="accent-sun">16:30~18:30 (일출 후)</span></li>
+              <li><span class="label">야간 활동:</span> 05:30까지 마켓·식사 가능</li>
+              <li><span class="label">청색광 차단:</span> 06:00 이후</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">19:30</span></li>
             </ul>
           </td>
           <td>
             <ul>
-              <li><span class="label">취침 / 기상:</span> 22:30~23:00 / 07:00</li>
-              <li><span class="label">아침 야외 빛:</span> 07:30~09:30</li>
-              <li><span class="label">저녁 빛 차단:</span> 17:00 이후</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">10:30</span></li>
-            </ul>
-          </td>
-          <td>
-            <ul>
-              <li><span class="label">취침 / 기상:</span> 22:30~23:00 / 07:30~08:00</li>
-              <li><span class="label">아침 야외 빛:</span> 07:30~09:30</li>
-              <li><span class="label">저녁 빛 차단:</span> 17:00 이후</li>
-              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">10:30</span></li>
+              <li><span class="label">취침 / 기상:</span> <strong>23:30~00:00 / 08:00~08:30</strong></li>
+              <li><span class="label">아침 야외 빛:</span> <span class="accent-sun">08:30~10:30 (일출 후)</span></li>
+              <li><span class="label">야간 활동:</span> <strong>21:30까지 마켓·식사 가능</strong></li>
+              <li><span class="label">청색광 차단:</span> 22:00 이후 (취침 90분 전)</li>
+              <li><span class="label">카페인 마감:</span> <span class="accent-caffeine">11:30</span></li>
             </ul>
           </td>
         </tr>
