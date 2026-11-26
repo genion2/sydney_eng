@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>블라인드 경품 베팅</title>
+<style>
+:root{--bg:#0f2a20;--felt:#14402f;--card:#1b4d3a;--line:#2c6b52;--ink:#f3efe4;--mute:#a9c3b5;--gold:#f2c14e;--red:#e4572e;--A:#ff8a5b;--B:#5bc0eb;--C:#c38cff}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;background:radial-gradient(circle at 50% 0,#1d5a43,var(--bg) 70%);color:var(--ink);min-height:100vh}
+.wrap{max-width:860px;margin:0 auto;padding:14px 14px 60px}
+h1{font-size:20px;margin:6px 0 2px;letter-spacing:-.3px}
+.sub{color:var(--mute);font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input,select{background:#0e3326;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:10px 12px;font-size:15px}
+input{flex:1;min-width:120px}
+button{background:var(--gold);color:#2a2000;border:0;border-radius:10px;padding:10px 14px;font-size:15px;font-weight:700;cursor:pointer}
+button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);font-weight:600}
+button.small{padding:6px 10px;font-size:13px}
+button:disabled{opacity:.4;cursor:not-allowed}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.code{font-family:ui-monospace,Menlo,monospace;background:#0e3326;border:1px dashed var(--gold);color:var(--gold);padding:4px 10px;border-radius:8px;font-size:18px;letter-spacing:3px}
+.banner{font-size:17px;font-weight:700;text-align:center;padding:12px;border-radius:12px;background:#0e3326;border:1px solid var(--line)}
+.banner.me{background:var(--gold);color:#2a2000;border-color:var(--gold)}
+.dicezone{display:flex;flex-direction:column;align-items:center;gap:12px;padding:8px 0}
+.die{width:86px;height:86px;background:#fffdf6;border-radius:18px;display:grid;grid-template:repeat(3,1fr)/repeat(3,1fr);padding:12px;box-shadow:0 6px 0 #c9c2ad,0 10px 20px rgba(0,0,0,.4)}
+.die i{width:16px;height:16px;border-radius:50%;background:#1b1b1b;place-self:center;visibility:hidden}
+.die.rolling{animation:shake .12s infinite}
+@keyframes shake{0%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}100%{transform:rotate(-8deg)}}
+.prizebtns{display:flex;gap:10px;width:100%}
+.prizebtns button{flex:1;font-size:20px;padding:16px 0;color:#111}
+.pA{background:var(--A)!important}.pB{background:var(--B)!important}.pC{background:var(--C)!important}
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.prize{border-radius:12px;padding:10px;background:#0e3326;border:2px solid var(--line);text-align:center}
+.prize .big{font-size:28px;font-weight:800}
+.prize .tot{color:var(--mute);font-size:13px}
+.prize.A{border-color:var(--A)}.prize.B{border-color:var(--B)}.prize.C{border-color:var(--C)}
+.seats{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.seat{background:#0e3326;border:1px solid var(--line);border-radius:12px;padding:10px;position:relative}
+.seat.turn{outline:3px solid var(--gold)}
+.seat.empty{opacity:.5;border-style:dashed}
+.seat .nm{font-weight:700}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#666;margin-right:6px;vertical-align:middle}
+.dot.on{background:#3ddc84}
+.chips{display:flex;flex-wrap:wrap;gap:2px;margin:6px 0}
+.chip{width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px dashed #8a6a10}
+.chip.off{background:transparent;border:1px solid #3d6b59}
+.bets{display:flex;gap:6px;font-size:13px}
+.bets span{flex:1;text-align:center;border-radius:6px;padding:3px 0;background:#123a2c}
+.tag{font-size:11px;background:var(--gold);color:#2a2000;border-radius:6px;padding:1px 6px;margin-left:4px;font-weight:700}
+.log{max-height:240px;overflow:auto;font-size:13px;line-height:1.6;color:var(--mute)}
+.log div:last-child{color:var(--ink)}
+.res{display:grid;gap:8px}
+.resrow{background:#0e3326;border-radius:12px;padding:12px;border-left:6px solid var(--line)}
+.resrow.A{border-left-color:var(--A)}.resrow.B{border-left-color:var(--B)}.resrow.C{border-left-color:var(--C)}
+.win{font-size:18px;font-weight:800}
+.rps button{font-size:26px;padding:14px 18px}
+.warn{color:#ffb4a2;font-size:13px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#000c;color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;z-index:9;display:none}
+.mute{color:var(--mute);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:5px;border-bottom:1px solid var(--line);text-align:center}
+details summary{cursor:pointer;color:var(--mute)}
+.hide{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div><h1>🎲 블라인드 경품 베팅</h1><div class="sub">참가자 6명 · 관전자 2명 · 1인 15칩</div></div>
+    <div id="roomBox" class="hide" style="text-align:right">
+      <div class="code" id="roomCode"></div>
+      <button class="ghost small" style="margin-top:6px" onclick="copyLink()">초대 링크 복사</button>
+    </div>
+  </div>
+
+  <!-- 첫 화면 -->
+  <div id="landing" class="card hide">
+    <div class="row"><input id="nameIn0" placeholder="내 이름 (최대 12자)" maxlength="12"></div>
+    <div class="row" style="margin-top:10px"><button onclick="createRoom()" style="flex:1">새 방 만들기 (진행자)</button></div>
+    <div class="row" style="margin-top:10px"><input id="codeIn" placeholder="방 코드 입력" maxlength="6" style="text-transform:uppercase"><button class="ghost" onclick="joinByCode()">입장</button></div>
+    <p class="mute">방을 만든 사람이 진행자가 됩니다. 진행자 화면이 게임을 운영하니 게임 끝까지 진행자 탭을 열어 두세요.</p>
+  </div>
+
+  <!-- 방 입장 전 자리 선택 -->
+  <div id="seatPick" class="card hide">
+    <div class="row"><input id="nameIn" placeholder="내 이름" maxlength="12"></div>
+    <div class="row" style="margin-top:10px">
+      <button style="flex:1" onclick="sendJoin('player')">참가자로 앉기</button>
+      <button class="ghost" style="flex:1" onclick="sendJoin('spectator')">관전하기</button>
+    </div>
+    <div id="pickInfo" class="mute" style="margin-top:8px"></div>
+  </div>
+
+  <div id="conn" class="mute" style="text-align:center;margin-top:8px">연결 중…</div>
+  <div id="hostWarn" class="warn hide" style="text-align:center">진행자 연결이 끊겼습니다. 진행자가 돌아오면 이어서 진행돼요.</div>
+
+  <div id="game" class="hide">
+    <div id="banner" class="banner"></div>
+
+    <div class="card dicezone">
+      <div id="die" class="die"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div id="dieInfo" class="mute"></div>
+      <button id="rollBtn" class="hide" onclick="act({type:'roll'})" style="width:100%;font-size:18px;padding:14px">🎲 주사위 굴리기</button>
+      <div id="prizeBtns" class="prizebtns hide">
+        <button class="pA" onclick="act({type:'bet',prize:'A'})">A</button>
+        <button class="pB" onclick="act({type:'bet',prize:'B'})">B</button>
+        <button class="pC" onclick="act({type:'bet',prize:'C'})">C</button>
+      </div>
+      <div id="rpsBox" class="rps hide" style="text-align:center">
+        <div id="rpsTitle" style="margin-bottom:8px;font-weight:700"></div>
+        <div id="rpsBtns" class="row" style="justify-content:center">
+          <button class="ghost" onclick="act({type:'rps',choice:'S'})">✌️</button>
+          <button class="ghost" onclick="act({type:'rps',choice:'R'})">✊</button>
+          <button class="ghost" onclick="act({type:'rps',choice:'P'})">🖐️</button>
+        </div>
+        <div id="rpsInfo" class="mute" style="margin-top:6px"></div>
+      </div>
+    </div>
+
+    <div id="resultsCard" class="card hide"><h3 style="margin:0 0 8px">🏆 결과</h3><div id="results" class="res"></div></div>
+
+    <div class="card">
+      <div class="board" id="board"></div>
+      <div id="betMode" class="mute" style="margin-top:8px;text-align:center"></div>
+    </div>
+
+    <div class="card"><div class="seats" id="seats"></div>
+      <div id="specs" class="mute" style="margin-top:10px"></div>
+    </div>
+
+    <div class="card"><b>진행 기록</b><div class="log" id="log"></div></div>
+
+    <div id="hostPanel" class="card hide">
+      <b>진행자 메뉴</b>
+      <div id="hostLobby" style="margin-top:8px">
+        <label class="row"><input type="checkbox" id="optOpen" style="flex:0" onchange="hostSet()"> 다른 사람의 경품별 베팅 내역 공개</label>
+        <label class="row"><input type="checkbox" id="optShuffle" style="flex:0" onchange="hostSet()"> 시작할 때 순서 무작위로 섞기</label>
+        <button style="margin-top:8px;width:100%" onclick="hostStart()">게임 시작</button>
+        <div class="mute" id="startInfo"></div>
+      </div>
+      <details style="margin-top:10px"><summary>경품 A·B·C 실제 내용 (게임 종료 후 공개)</summary>
+        <div class="row" style="margin-top:6px"><input id="pzA" placeholder="A 경품"><input id="pzB" placeholder="B 경품"><input id="pzC" placeholder="C 경품"></div>
+        <div class="row" style="margin-top:6px"><button class="ghost small" onclick="hostPrizes(false)">저장</button><button class="small" id="revealBtn" onclick="hostPrizes(true)">결과 화면에 공개</button></div>
+      </details>
+      <div class="row" style="margin-top:10px">
+        <button class="ghost small" id="proxyBtn" onclick="hostProxy()">현재 차례 대신 진행</button>
+        <button class="ghost small" onclick="hostReset()">새 게임 (같은 인원)</button>
+      </div>
+      <div id="kickBox" class="row" style="margin-top:8px"></div>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="mqtt.min.js"></script>
+<script src="logic.js"></script>
+<script>
+const BROKERS=['wss://broker.emqx.io:8084/mqtt','wss://broker.hivemq.com:8884/mqtt','wss://test.mosquitto.org:8081/mqtt'];
+const $=id=>document.getElementById(id);
+const qs=new URLSearchParams(location.search);
+let ROOM=(qs.get('room')||'').toUpperCase(), BIDX=+(qs.get('b')||0);
+let CID=localStorage.getItem('bbg-cid'); if(!CID){CID=Math.random().toString(36).slice(2,10);localStorage.setItem('bbg-cid',CID)}
+let NAME=localStorage.getItem('bbg-name')||'';
+let client=null, base='', S=null /* 화면 상태 */, H=null /* 진행자 전체 상태 */, isHost=false;
+let lastSeen={}, rpsChoices={}, myPriv=null, lastHb=Date.now(), lastRollT=0, proxy=false;
+
+function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2600)}
+function rnd(){const a=new Uint32Array(1);crypto.getRandomValues(a);return a[0]/4294967296}
+function link(){return `${location.origin}${location.pathname}?room=${ROOM}&b=${BIDX}`}
+function copyLink(){const l=link();(navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>toast('초대 링크를 복사했어요')).catch(()=>prompt('링크를 복사하세요',l))}
+
+// ---------- 시작 ----------
+function boot(){
+  $('nameIn0').value=NAME;$('nameIn').value=NAME;
+  if(!ROOM){$('landing').classList.remove('hide');$('conn').classList.add('hide');return}
+  const saved=localStorage.getItem('bbg-host-'+ROOM);
+  if(saved){try{H=JSON.parse(saved);if(H.hostId===CID)isHost=true;else H=null}catch(e){H=null}}
+  connect();
+}
+function createRoom(){
+  NAME=$('nameIn0').value.trim(); if(!NAME)return toast('이름을 입력하세요');
+  localStorage.setItem('bbg-name',NAME);
+  const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';ROOM=Array.from({length:5},()=>A[Math.floor(rnd()*A.length)]).join('');
+  H=Game.newState(ROOM,CID);H.hostName=NAME;isHost=true;saveHost();
+  history.replaceState(null,'',`?room=${ROOM}&b=0`);BIDX=0;
+  $('landing').classList.add('hide');$('conn').classList.remove('hide');connect(true);
+}
+function joinByCode(){const c=$('codeIn').value.trim().toUpperCase();if(!c)return;location.search=`?room=${c}&b=0`}
+
+function connect(tryOthers){
+  $('roomBox').classList.remove('hide');$('roomCode').textContent=ROOM;
+  base=`hark-bbg/v1/${ROOM}`;
+  const url=qs.get('broker')||BROKERS[BIDX]||BROKERS[0];
+  client=mqtt.connect(url,{clientId:'bbg_'+CID+'_'+Math.random().toString(36).slice(2,6),keepalive:30,reconnectPeriod:2000,connectTimeout:8000,clean:true});
+  let ok=false;
+  client.on('connect',()=>{
+    ok=true;$('conn').classList.add('hide');
+    client.subscribe([base+'/state',base+'/hb',base+'/p/'+CID,base+'/p/'+CID+'/err']);
+    if(isHost){client.subscribe(base+'/act');publish();}
+    if(!S&&!isHost) setTimeout(()=>{if(!S){$('conn').classList.remove('hide');$('conn').textContent='방을 찾지 못했어요. 코드를 확인하거나 진행자가 방을 열어 두었는지 확인하세요.'}},6000);
+  });
+  client.on('error',()=>{});
+  client.on('offline',()=>{$('conn').classList.remove('hide');$('conn').textContent='연결이 끊겼어요. 다시 연결하는 중…'});
+  setTimeout(()=>{ // 진행자만: 첫 브로커가 안 되면 다음 서버로
+    if(!ok&&tryOthers&&isHost&&BIDX<BROKERS.length-1){client.end(true);BIDX++;history.replaceState(null,'',`?room=${ROOM}&b=${BIDX}`);connect(true)}
+  },9000);
+  client.on('message',(t,m)=>{
+    const str=m.toString(); if(!str)return;
+    let d; try{d=JSON.parse(str)}catch(e){return}
+    if(t===base+'/state'){ if(!isHost){S=d;lastHb=Date.now();render()} }
+    else if(t===base+'/hb'){lastHb=Date.now()}
+    else if(t===base+'/p/'+CID+'/err'){toast(d.err||'처리할 수 없어요')}
+    else if(t===base+'/p/'+CID){myPriv=d;render()}
+    else if(t===base+'/act'&&isHost){handle(d)}
+  });
+  setInterval(()=>{ if(!isHost&&client.connected) client.publish(base+'/act',JSON.stringify({cid:CID,type:'ping'})) },8000);
+  setInterval(()=>{ if(isHost){ if(client.connected)client.publish(base+'/hb',JSON.stringify({t:Date.now()})); checkPresence() } else { $('hostWarn').classList.toggle('hide',!S||Date.now()-lastHb<25000) } },5000);
+  if(isHost){S=Game.redact(H);render()}
+}
+
+// ---------- 행동 ----------
+function act(a){
+  a.cid=CID; if(proxy&&isHost&&(a.type==='roll'||a.type==='bet')) a.proxy=true;
+  if(isHost) handle(a); else client.publish(base+'/act',JSON.stringify(a));
+}
+function sendJoin(role){
+  NAME=$('nameIn').value.trim(); if(!NAME)return toast('이름을 입력하세요');
+  localStorage.setItem('bbg-name',NAME); act({type:'join',name:NAME,role});
+}
+
+// ---------- 진행자(호스트) 처리 ----------
+function saveHost(){localStorage.setItem('bbg-host-'+ROOM,JSON.stringify(H))}
+function publish(){
+  H.v++; saveHost();
+  const pub=Game.redact(H); pub.online=onlineMap();
+  if(client&&client.connected){
+    client.publish(base+'/state',JSON.stringify(pub),{retain:true,qos:1});
+    if(!H.settings.openBets) H.seats.forEach(p=>p&&client.publish(base+'/p/'+p.cid,JSON.stringify({bets:p.bets}),{retain:true}));
+  }
+  S=pub; if(!H.settings.openBets){const i=Game.seatOf(H,CID);myPriv=i>=0?{bets:H.seats[i].bets}:null}
+  render();
+}
+function onlineMap(){const o={};const now=Date.now();o[CID]=1;Object.keys(lastSeen).forEach(c=>{if(now-lastSeen[c]<25000)o[c]=1});return o}
+let lastOnlineKey='';
+function checkPresence(){const k=Object.keys(onlineMap()).sort().join();if(k!==lastOnlineKey){lastOnlineKey=k;publish()}}
+function handle(a){
+  if(!a||!a.cid)return; lastSeen[a.cid]=Date.now();
+  if(a.type==='ping'){return}
+  let r={ok:true};
+  const fromHost=a.cid===CID;
+  let seat=Game.seatOf(H,a.cid);
+  if(a.proxy&&fromHost) seat=Game.currentSeat(H);
+  switch(a.type){
+    case 'join': r=Game.join(H,a.cid,a.name,a.role); break;
+    case 'leave': r=Game.leave(H,a.cid); break;
+    case 'roll': r=Game.roll(H,seat,rnd); break;
+    case 'bet': r=Game.bet(H,seat,a.prize); break;
+    case 'rps':{
+      if(H.phase!=='rps')return;
+      let s2=seat; if(a.proxy&&fromHost) s2=a.seat;
+      if(!H.rps.seats.includes(s2))return;
+      rpsChoices[s2]=a.choice; if(!H.rps.chosen.includes(s2))H.rps.chosen.push(s2);
+      if(H.rps.seats.every(i=>rpsChoices[i])){const ch={...rpsChoices};rpsChoices={};Game.resolveRps(H,ch)}
+      break;}
+    default: if(!fromHost)return;
+  }
+  if(!r.ok){ if(fromHost)toast(r.err); else client.publish(base+'/p/'+a.cid+'/err',JSON.stringify(r)); return }
+  publish();
+}
+function hostSet(){H.settings.openBets=$('optOpen').checked;H.settings.shuffle=$('optShuffle').checked;publish()}
+function hostStart(){const r=Game.start(H,rnd);if(!r.ok)return toast(r.err);rpsChoices={};publish()}
+function hostReset(){if(!confirm('현재 게임을 지우고 같은 인원으로 새 게임을 준비할까요?'))return;H=Game.reset(H);rpsChoices={};publish()}
+function hostPrizes(reveal){['A','B','C'].forEach(p=>H.prizeNames[p]=$('pz'+p).value.trim());if(reveal){if(H.phase!=='done')return toast('게임이 끝난 뒤 공개할 수 있어요');H.revealed=true}publish();toast(reveal?'경품을 공개했어요':'저장했어요')}
+function hostProxy(){proxy=!proxy;$('proxyBtn').textContent=proxy?'대신 진행 끄기':'현재 차례 대신 진행';render()}
+function hostKick(i){if(!confirm(`${i+1}번 자리를 비울까요?`))return;H.seats[i]=null;publish()}
+function hostKickSpec(c){H.spectators=H.spectators.filter(x=>x.cid!==c);publish()}
+
+// ---------- 화면 ----------
+const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
+function face(n){[...$('die').children].forEach((d,i)=>d.style.visibility=(PIPS[n]||[]).includes(i)?'visible':'hidden')}
+function animateDie(n){const d=$('die');d.classList.add('rolling');let k=0;const iv=setInterval(()=>{face(1+Math.floor(Math.random()*6));if(++k>8){clearInterval(iv);d.classList.remove('rolling');face(n)}},80)}
+function esc(s){return String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function render(){
+  if(!S)return;
+  const mySeat=S.seats.findIndex(p=>p&&p.cid===CID);
+  const amSpec=S.spectators.some(x=>x.cid===CID);
+  const joined=mySeat>=0||amSpec;
+  $('seatPick').classList.toggle('hide',joined||(isHost&&S.phase!=='lobby'));
+  $('game').classList.remove('hide');
+  const pc=S.seats.filter(Boolean).length;
+  $('pickInfo').textContent=S.phase==='lobby'?`참가자 ${pc}/6 · 관전자 ${S.spectators.length}/2`+(isHost?' · 진행만 하려면 자리를 고르지 않아도 돼요':''):'게임이 진행 중이라 관전만 가능해요';
+  const online=S.online||{};
+  const cur=S.phase==='playing'?S.order[S.turnPos]:-1;
+  const lb=i=>`${i+1}번 ${esc(S.seats[i]?.name)}`;
+
+  // 배너
+  const b=$('banner');b.classList.remove('me');
+  if(S.phase==='lobby') b.textContent=`대기 중 · 참가자 ${pc}/6 · 관전자 ${S.spectators.length}/2 · 진행자 ${esc(S.hostName||'')}`;
+  else if(S.phase==='playing'){ if(cur===mySeat){b.classList.add('me');b.textContent=S.pending?`🎲 ${S.pending.roll}! 베팅할 경품을 고르세요`:'내 차례! 주사위를 굴리세요'} else b.innerHTML=`${lb(cur)} 차례`+(S.pending?` · 🎲${S.pending.roll} 경품 고르는 중`:'') }
+  else if(S.phase==='rps') b.textContent=`경품 ${S.rps.prize} 가위바위보 ${S.rps.round}회차`;
+  else b.textContent='게임 종료! 결과를 확인하세요';
+
+  // 주사위
+  if(S.lastRoll&&S.lastRoll.t!==lastRollT){const first=!lastRollT;lastRollT=S.lastRoll.t;first?face(S.lastRoll.roll):animateDie(S.lastRoll.roll)}
+  if(!S.lastRoll) face(0);
+  $('dieInfo').innerHTML=S.lastRoll?`${lb(S.lastRoll.seat)}: ${S.lastRoll.roll}`+(S.lastRoll.burned!=null?` → 칩 부족, ${S.lastRoll.burned}칩 소멸`:''):'';
+  const canAct=S.phase==='playing'&&(cur===mySeat||(isHost&&proxy));
+  $('rollBtn').classList.toggle('hide',!(canAct&&!S.pending));
+  $('rollBtn').textContent=cur===mySeat?'🎲 주사위 굴리기':`🎲 ${S.seats[cur]?.name||''} 대신 굴리기`;
+  $('prizeBtns').classList.toggle('hide',!(canAct&&S.pending));
+
+  // 가위바위보
+  const rb=$('rpsBox');
+  if(S.phase==='rps'){
+    rb.classList.remove('hide');
+    const inIt=S.rps.seats.includes(mySeat), chosen=S.rps.chosen.includes(mySeat);
+    $('rpsTitle').innerHTML=`경품 ${S.rps.prize}: ${S.rps.seats.map(lb).join(' vs ')}`;
+    $('rpsBtns').classList.toggle('hide',!(inIt&&!chosen));
+    let info=`낸 사람: ${S.rps.chosen.map(lb).join(', ')||'아직 없음'}`;
+    if(isHost){const left=S.rps.seats.filter(i=>!S.rps.chosen.includes(i));info+=left.length?`<br>진행자 대신 내기: `+left.map(i=>`${lb(i)} <button class="ghost small" onclick="act({type:'rps',choice:'S',proxy:1,seat:${i}})">✌️</button><button class="ghost small" onclick="act({type:'rps',choice:'R',proxy:1,seat:${i}})">✊</button><button class="ghost small" onclick="act({type:'rps',choice:'P',proxy:1,seat:${i}})">🖐️</button>`).join('<br>'):''}
+    if(inIt&&chosen) info='냈어요! 상대를 기다리는 중…<br>'+info;
+    $('rpsInfo').innerHTML=info;
+  } else rb.classList.add('hide');
+
+  // 경품판
+  const open=S.settings.openBets||S.phase==='done'||S.phase==='rps';
+  const myBets=mySeat>=0?(S.seats[mySeat].bets||myPriv?.bets):null;
+  $('board').innerHTML=['A','B','C'].map(p=>{
+    let tot='';
+    if(open){const t=S.seats.reduce((a,x)=>a+(x&&x.bets?x.bets[p]:0),0);tot=`총 ${t}칩`}
+    const mine=myBets?`<div class="tot">내 베팅 ${myBets[p]}칩</div>`:'';
+    const nm=S.revealed&&S.prizeNames[p]?`<div style="font-weight:700">${esc(S.prizeNames[p])}</div>`:'<div class="tot">??? 블라인드</div>';
+    return `<div class="prize ${p}"><div class="big" style="color:var(--${p})">${p}</div>${nm}<div class="tot">${tot}</div>${mine}</div>`}).join('');
+  $('betMode').textContent=S.settings.openBets?'베팅 공개 모드: 모두가 경품별 베팅액을 볼 수 있어요':'베팅 비공개 모드: 내 베팅만 보이고, 다른 사람은 남은 칩만 보여요 (종료 후 전부 공개)';
+
+  // 자리
+  $('seats').innerHTML=S.seats.map((p,i)=>{
+    if(!p) return `<div class="seat empty"><div class="nm">${i+1}번 · 빈 자리</div></div>`;
+    const chips=Array.from({length:15},(_,k)=>`<div class="chip ${k<p.chips?'':'off'}"></div>`).join('');
+    const bets=p.bets?`<div class="bets">${['A','B','C'].map(z=>`<span style="color:var(--${z})">${z} ${p.bets[z]}</span>`).join('')}</div>`:'';
+    const me=p.cid===CID?'<span class="tag">나</span>':'';
+    const kick=isHost&&S.phase==='lobby'?` <button class="ghost small" onclick="hostKick(${i})">비우기</button>`:'';
+    return `<div class="seat ${i===cur?'turn':''}"><div class="nm"><span class="dot ${online[p.cid]?'on':''}"></span>${i+1}번 ${esc(p.name)}${me}${kick}</div><div class="chips">${chips}</div><div class="mute">남은 칩 ${p.chips}개</div>${bets}</div>`}).join('');
+  $('specs').innerHTML='관전자: '+(S.spectators.map(x=>`<span class="dot ${online[x.cid]?'on':''}"></span>${esc(x.name)}${x.cid===CID?' (나)':''}${isHost?` <button class="ghost small" onclick="hostKickSpec('${x.cid}')">내보내기</button>`:''}`).join(' · ')||'없음')+` (${S.spectators.length}/2)`;
+
+  // 기록
+  const lg=$('log');lg.innerHTML=S.log.map(l=>`<div>${esc(l.text)}</div>`).join('')||'<div>아직 기록이 없어요</div>';lg.scrollTop=lg.scrollHeight;
+
+  // 결과
+  const rc=$('resultsCard');
+  if(S.results){rc.classList.remove('hide');
+    $('results').innerHTML=['A','B','C'].map(p=>{const r=S.results[p];
+      const rows=S.seats.map((x,i)=>x&&x.bets?{i,a:x.bets[p]}:null).filter(Boolean).sort((a,b)=>b.a-a.a);
+      const cnt={};rows.forEach(x=>{if(x.a>0)cnt[x.a]=(cnt[x.a]||0)+1});
+      const tbl=`<table><tr>${rows.map(x=>`<th>${x.i+1}번</th>`).join('')}</tr><tr>${rows.map(x=>`<td style="${cnt[x.a]>1?'text-decoration:line-through;color:#ffb4a2':''}${r.winner===x.i&&r.status==='win'?';color:var(--gold);font-weight:800':''}">${x.a||"-"}</td>`).join('')}</tr></table>`;
+      let w;
+      if(r.status==='none') w='베팅 없음 → 당첨자 없음';
+      else if(r.status==='win') w=`🏆 ${lb(r.winner)}${r.byRps?' (가위바위보 승리)':` (${r.amount}칩)`}`;
+      else w=`가위바위보 진행 중: ${r.seats.map(lb).join(', ')}`;
+      const nm=S.revealed&&S.prizeNames[p]?` · ${esc(S.prizeNames[p])}`:'';
+      return `<div class="resrow ${p}"><div class="mute">경품 ${p}${nm}</div><div class="win">${w}</div>${tbl}<div class="mute">취소선 = 중복 금액 무효</div></div>`}).join('');
+  } else rc.classList.add('hide');
+
+  // 진행자 메뉴
+  $('hostPanel').classList.toggle('hide',!isHost);
+  if(isHost){
+    $('hostLobby').classList.toggle('hide',S.phase!=='lobby');
+    $('optOpen').checked=H.settings.openBets;$('optShuffle').checked=H.settings.shuffle;
+    $('startInfo').textContent=pc<6?`현재 참가자 ${pc}명 (규칙상 6명, 2명 이상이면 시작 가능)`:'6명 모두 앉았어요!';
+    ['A','B','C'].forEach(p=>{if(document.activeElement!==$('pz'+p)&&!$('pz'+p).value)$('pz'+p).value=H.prizeNames[p]||''});
+    $('proxyBtn').classList.toggle('hide',S.phase!=='playing');
+  }
+}
+boot();
+</script>
+</body>
+</html>
