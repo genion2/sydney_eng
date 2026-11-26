@@ -78,9 +78,9 @@ details summary{cursor:pointer;color:var(--mute)}
   <!-- 첫 화면 -->
   <div id="landing" class="card hide">
     <div class="row"><input id="nameIn0" placeholder="내 이름 (최대 12자)" maxlength="12"></div>
-    <div class="row" style="margin-top:10px"><button onclick="createRoom()" style="flex:1">새 방 만들기 (진행자)</button></div>
+    <div class="row" style="margin-top:10px"><input id="adminCode" type="password" inputmode="numeric" placeholder="방 개설 코드" maxlength="20"><button onclick="createRoom()">새 방 만들기 (진행자)</button></div>
     <div class="row" style="margin-top:10px"><input id="codeIn" placeholder="방 코드 입력" maxlength="6" style="text-transform:uppercase"><button class="ghost" onclick="joinByCode()">입장</button></div>
-    <p class="mute">방을 만든 사람이 진행자가 됩니다. 진행자 화면이 게임을 운영하니 게임 끝까지 진행자 탭을 열어 두세요.</p>
+    <p class="mute">방 개설은 개설 코드를 아는 사람만 할 수 있어요. 참가자·관전자는 초대 링크나 방 코드로 들어오면 됩니다. 방을 만든 사람이 진행자가 됩니다. 진행자 화면이 게임을 운영하니 게임 끝까지 진행자 탭을 열어 두세요.</p>
   </div>
 
   <!-- 방 입장 전 자리 선택 -->
@@ -179,8 +179,11 @@ function boot(){
   if(saved){try{H=JSON.parse(saved);if(H.hostId===CID)isHost=true;else H=null}catch(e){H=null}}
   connect();
 }
-function createRoom(){
+const ADMIN_HASH='1d6cff7924d1226979b7b5b00c8c63d120bf799a9a48933913e16c7db1e8fc46';
+async function sha256(t){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function createRoom(){
   NAME=$('nameIn0').value.trim(); if(!NAME)return toast('이름을 입력하세요');
+  if(await sha256('bbg-salt:'+$('adminCode').value.trim())!==ADMIN_HASH)return toast('개설 코드가 맞지 않아요');
   localStorage.setItem('bbg-name',NAME);
   const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';ROOM=Array.from({length:5},()=>A[Math.floor(rnd()*A.length)]).join('');
   H=Game.newState(ROOM,CID);H.hostName=NAME;isHost=true;saveHost();
