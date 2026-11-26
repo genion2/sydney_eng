@@ -98,6 +98,7 @@ details summary{cursor:pointer;color:var(--mute)}
     <div id="roomBox" class="hide" style="text-align:right">
       <div class="code" id="roomCode"></div>
       <button class="ghost small" style="margin-top:6px" onclick="copyLink()">초대 링크 복사</button>
+      <button class="ghost small" style="margin-top:6px" onclick="leaveRoom()">나가기</button>
     </div>
   </div>
 
@@ -119,8 +120,9 @@ details summary{cursor:pointer;color:var(--mute)}
     <div id="pickInfo" class="mute" style="margin-top:8px"></div>
   </div>
 
+  <div id="closedBox" class="card hide" style="text-align:center"><div style="font-size:17px;font-weight:700;margin-bottom:10px">이 방은 종료됐어요</div><button onclick="goHome()">처음 화면으로</button></div>
   <div id="conn" class="mute" style="text-align:center;margin-top:8px">연결 중…</div>
-  <div id="hostWarn" class="warn hide" style="text-align:center">진행자 연결이 끊겼습니다. 진행자가 돌아오면 이어서 진행돼요.</div>
+  <div id="hostWarn" class="warn hide" style="text-align:center">방장 연결이 끊겼어요. 10분 안에 돌아오지 않으면 방이 자동으로 닫혀요.</div>
 
   <div id="game" class="hide">
     <div id="banner" class="banner"></div>
@@ -174,6 +176,7 @@ details summary{cursor:pointer;color:var(--mute)}
       <div class="row" style="margin-top:10px">
         <button class="ghost small" id="proxyBtn" onclick="hostProxy()">현재 차례 대신 진행</button>
         <button class="ghost small" onclick="hostReset()">새 게임 (같은 인원)</button>
+        <button class="ghost small" style="border-color:var(--red);color:#ffb4a2" onclick="hostClose()">방 닫기 (삭제)</button>
       </div>
       <div id="kickBox" class="row" style="margin-top:8px"></div>
     </div>
@@ -221,7 +224,7 @@ function boot(){
   $('nameIn0').value=NAME;$('nameIn').value=NAME;
   if(!ROOM){$('landing').classList.remove('hide');$('conn').classList.add('hide');return}
   const saved=localStorage.getItem('bbg-host-'+ROOM);
-  if(saved){try{H=JSON.parse(saved);if(H.hostId===CID){isHost=true;H.rolling=null}else H=null}catch(e){H=null}}
+  if(saved){try{H=JSON.parse(saved);if(H.hostId===CID&&!(H.updatedAt&&Date.now()-H.updatedAt>EXPIRE)){isHost=true;H.rolling=null}else{localStorage.removeItem('bbg-host-'+ROOM);H=null}}catch(e){H=null}}
   connect();
 }
 const ADMIN_HASH='1d6cff7924d1226979b7b5b00c8c63d120bf799a9a48933913e16c7db1e8fc46';
@@ -235,6 +238,26 @@ async function createRoom(){
   history.replaceState(null,'',`?room=${ROOM}&b=0`);BIDX=0;
   $('landing').classList.add('hide');$('conn').classList.remove('hide');connect(true);
 }
+const EXPIRE=10*60*1000; // 진행자 신호가 10분 끊기면 방 종료
+function goHome(){location.href=location.pathname}
+function leaveRoom(){
+  if(isHost)return hostClose();
+  if(client&&client.connected) client.publish(base+'/act',JSON.stringify({cid:CID,type:'leave'}));
+  setTimeout(goHome,300);
+}
+function hostClose(){
+  if(!confirm('방장이 나가면 방이 닫히고 모든 참가자가 나가져요. 나갈까요?'))return;
+  const opts={retain:true,qos:1};
+  if(client&&client.connected){
+    client.publish(base+'/state',JSON.stringify({closed:true,room:ROOM,updatedAt:Date.now()}),opts);
+    client.publish(base+'/hb','',{retain:true});
+    H.seats.forEach(p=>p&&client.publish(base+'/p/'+p.cid,'',{retain:true}));
+  }
+  localStorage.removeItem('bbg-host-'+ROOM);isHost=false;H=null;
+  setTimeout(goHome,700);
+}
+let CLOSED=false;
+function showClosed(){CLOSED=true;$('game').classList.add('hide');$('seatPick').classList.add('hide');$('conn').classList.add('hide');$('closedBox').classList.remove('hide')}
 function joinByCode(){const c=$('codeIn').value.trim().toUpperCase();if(!c)return;location.search=`?room=${c}&b=0`}
 
 function connect(tryOthers){
@@ -247,7 +270,7 @@ function connect(tryOthers){
     ok=true;$('conn').classList.add('hide');
     client.subscribe([base+'/state',base+'/hb',base+'/p/'+CID,base+'/p/'+CID+'/err']);
     if(isHost){client.subscribe(base+'/act');publish();}
-    if(!S&&!isHost) setTimeout(()=>{if(!S){$('conn').classList.remove('hide');$('conn').textContent='방을 찾지 못했어요. 코드를 확인하거나 진행자가 방을 열어 두었는지 확인하세요.'}},6000);
+    if(!S&&!isHost) setTimeout(()=>{if(!S&&!CLOSED){$('conn').classList.remove('hide');$('conn').textContent='방을 찾지 못했어요. 코드를 확인하거나 진행자가 방을 열어 두었는지 확인하세요.'}},6000);
   });
   client.on('error',()=>{});
   client.on('offline',()=>{$('conn').classList.remove('hide');$('conn').textContent='연결이 끊겼어요. 다시 연결하는 중…'});
@@ -257,14 +280,14 @@ function connect(tryOthers){
   client.on('message',(t,m)=>{
     const str=m.toString(); if(!str)return;
     let d; try{d=JSON.parse(str)}catch(e){return}
-    if(t===base+'/state'){ if(!isHost){S=d;lastHb=Date.now();render()} }
-    else if(t===base+'/hb'){lastHb=Date.now()}
+    if(t===base+'/state'){ if(!isHost){ if(d.closed){S=null;return showClosed()} S=d;render()} }
+    else if(t===base+'/hb'){ if(!isHost){lastHb=d.t||Date.now(); if(Date.now()-lastHb>EXPIRE){S=null;showClosed()}} }
     else if(t===base+'/p/'+CID+'/err'){toast(d.err||'처리할 수 없어요')}
     else if(t===base+'/p/'+CID){myPriv=d;render()}
     else if(t===base+'/act'&&isHost){handle(d)}
   });
   setInterval(()=>{ if(!isHost&&client.connected) client.publish(base+'/act',JSON.stringify({cid:CID,type:'ping'})) },8000);
-  setInterval(()=>{ if(isHost){ if(client.connected)client.publish(base+'/hb',JSON.stringify({t:Date.now()})); checkPresence() } else { $('hostWarn').classList.toggle('hide',!S||Date.now()-lastHb<25000) } },5000);
+  setInterval(()=>{ if(isHost){ if(client.connected)client.publish(base+'/hb',JSON.stringify({t:Date.now()}),{retain:true}); H.updatedAt=Date.now(); saveHost(); checkPresence() } else { if(S&&Date.now()-lastHb>EXPIRE){S=null;showClosed()} $('hostWarn').classList.toggle('hide',!S||Date.now()-lastHb<25000) } },5000);
   if(isHost){S=Game.redact(H);render()}
 }
 
@@ -281,7 +304,7 @@ function sendJoin(role){
 // ---------- 진행자(호스트) 처리 ----------
 function saveHost(){localStorage.setItem('bbg-host-'+ROOM,JSON.stringify(H))}
 function publish(){
-  H.v++; saveHost();
+  H.v++; H.updatedAt=Date.now(); saveHost();
   const pub=Game.redact(H); pub.online=onlineMap();
   if(client&&client.connected){
     client.publish(base+'/state',JSON.stringify(pub),{retain:true,qos:1});
@@ -443,7 +466,7 @@ function render(){
   // 진행자 메뉴
   $('hostPanel').classList.toggle('hide',!isHost);
   if(isHost){
-    $('hostLobby').classList.toggle('hide',S.phase!=='lobby');
+    $('hostWarn').classList.add('hide');$('hostLobby').classList.toggle('hide',S.phase!=='lobby');
     $('optOpen').checked=H.settings.openBets;$('optShuffle').checked=H.settings.shuffle;
     $('startInfo').textContent=pc<6?`현재 참가자 ${pc}명 (규칙상 6명, 2명 이상이면 시작 가능)`:'6명 모두 앉았어요!';
     ['A','B','C'].forEach(p=>{if(document.activeElement!==$('pz'+p)&&!$('pz'+p).value)$('pz'+p).value=H.prizeNames[p]||''});
