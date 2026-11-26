@@ -44,11 +44,31 @@ button:disabled{opacity:.4;cursor:not-allowed}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#666;margin-right:6px;vertical-align:middle}
 .dot.on{background:#3ddc84}
 .chips{display:flex;flex-wrap:wrap;gap:2px;margin:6px 0}
-.chip{width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px dashed #8a6a10}
+.chip{width:13px;height:13px;border-radius:50%;background:var(--c,var(--gold));border:2px dashed rgba(255,255,255,.85)}
 .chip.off{background:transparent;border:1px solid #3d6b59}
 .bets{display:flex;gap:6px;font-size:13px}
 .bets span{flex:1;text-align:center;border-radius:6px;padding:3px 0;background:#123a2c}
 .tag{font-size:11px;background:var(--gold);color:#2a2000;border-radius:6px;padding:1px 6px;margin-left:4px;font-weight:700}
+.board{grid-template-columns:repeat(3,1fr)}
+@media(max-width:640px){.board{grid-template-columns:1fr}}
+.stacks{display:flex;justify-content:center;align-items:flex-end;gap:6px;min-height:118px;padding:8px 0 2px;border-radius:50%/18px;background:radial-gradient(ellipse at 50% 90%,rgba(0,0,0,.25),transparent 70%)}
+.stack{display:flex;flex-direction:column-reverse;align-items:center}
+.cchip{width:34px;height:10px;border-radius:50%;margin-top:-4px;background:var(--c);border:2px dashed rgba(255,255,255,.9);box-shadow:0 2px 0 rgba(0,0,0,.5);}
+.cchip.new{animation:drop .35s ease-out both}
+@keyframes drop{from{transform:translateY(-30px);opacity:0}to{transform:none;opacity:1}}
+.stack .n{font-size:11px;font-weight:700;margin-top:4px;color:var(--c)}
+.stack .amt{font-size:12px;font-weight:800;margin-bottom:4px}
+.emptystack{color:var(--mute);font-size:13px;align-self:center}
+button.die{cursor:pointer;border:0;width:110px;height:110px;padding:16px;border-radius:22px}
+button.die.ready{box-shadow:0 6px 0 #c9c2ad,0 0 0 6px var(--gold),0 0 30px var(--gold);animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.06)}}
+.die i{width:18px;height:18px}
+.die.pop{animation:pop .4s}
+@keyframes pop{0%{transform:scale(1.35)}100%{transform:scale(1)}}
+.prizebtns button.sel{outline:4px solid #fff;transform:translateY(-3px);box-shadow:0 0 18px #fff8}
+.prizebtns button:not(.sel){opacity:.75}
+#passBtn{width:100%;font-size:18px;padding:14px;background:#3ddc84;color:#04210f}
+.pcol{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c);border:2px dashed #fff;margin-right:4px;vertical-align:middle}
 .log{max-height:240px;overflow:auto;font-size:13px;line-height:1.6;color:var(--mute)}
 .log div:last-child{color:var(--ink)}
 .res{display:grid;gap:8px}
@@ -100,14 +120,15 @@ details summary{cursor:pointer;color:var(--mute)}
     <div id="banner" class="banner"></div>
 
     <div class="card dicezone">
-      <div id="die" class="die"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <button id="die" class="die" onclick="dieClick()" aria-label="주사위 굴리기"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></button>
+      <div id="dieHint" style="font-weight:700"></div>
       <div id="dieInfo" class="mute"></div>
-      <button id="rollBtn" class="hide" onclick="act({type:'roll'})" style="width:100%;font-size:18px;padding:14px">🎲 주사위 굴리기</button>
-      <div id="prizeBtns" class="prizebtns hide">
-        <button class="pA" onclick="act({type:'bet',prize:'A'})">A</button>
-        <button class="pB" onclick="act({type:'bet',prize:'B'})">B</button>
-        <button class="pC" onclick="act({type:'bet',prize:'C'})">C</button>
+            <div id="prizeBtns" class="prizebtns hide">
+        <button class="pA" id="pickA" onclick="pick('A')">A</button>
+        <button class="pB" id="pickB" onclick="pick('B')">B</button>
+        <button class="pC" id="pickC" onclick="pick('C')">C</button>
       </div>
+      <button id="passBtn" class="hide" onclick="confirmTurn()">턴 넘기기</button>
       <div id="rpsBox" class="rps hide" style="text-align:center">
         <div id="rpsTitle" style="margin-bottom:8px;font-weight:700"></div>
         <div id="rpsBtns" class="row" style="justify-content:center">
@@ -164,6 +185,8 @@ let ROOM=(qs.get('room')||'').toUpperCase(), BIDX=+(qs.get('b')||0);
 let CID=localStorage.getItem('bbg-cid'); if(!CID){CID=Math.random().toString(36).slice(2,10);localStorage.setItem('bbg-cid',CID)}
 let NAME=localStorage.getItem('bbg-name')||'';
 let client=null, base='', S=null /* 화면 상태 */, H=null /* 진행자 전체 상태 */, isHost=false;
+const COLORS=['#e63946','#1d6fe8','#16a34a','#f59e0b','#8b5cf6','#1f1f1f'];
+let picked=null,pickKey='',spinIv=null;
 let lastSeen={}, rpsChoices={}, myPriv=null, lastHb=Date.now(), lastRollT=0, proxy=false;
 
 function toast(m){const t=$('toast');t.textContent=m;t.style.display='block';clearTimeout(t._h);t._h=setTimeout(()=>t.style.display='none',2600)}
@@ -176,7 +199,7 @@ function boot(){
   $('nameIn0').value=NAME;$('nameIn').value=NAME;
   if(!ROOM){$('landing').classList.remove('hide');$('conn').classList.add('hide');return}
   const saved=localStorage.getItem('bbg-host-'+ROOM);
-  if(saved){try{H=JSON.parse(saved);if(H.hostId===CID)isHost=true;else H=null}catch(e){H=null}}
+  if(saved){try{H=JSON.parse(saved);if(H.hostId===CID){isHost=true;H.rolling=null}else H=null}catch(e){H=null}}
   connect();
 }
 const ADMIN_HASH='1d6cff7924d1226979b7b5b00c8c63d120bf799a9a48933913e16c7db1e8fc46';
@@ -225,7 +248,7 @@ function connect(tryOthers){
 
 // ---------- 행동 ----------
 function act(a){
-  a.cid=CID; if(proxy&&isHost&&(a.type==='roll'||a.type==='bet')) a.proxy=true;
+  a.cid=CID; if(proxy&&isHost&&(a.type==='roll'||a.type==='bet'||a.type==='pass')) a.proxy=true;
   if(isHost) handle(a); else client.publish(base+'/act',JSON.stringify(a));
 }
 function sendJoin(role){
@@ -258,7 +281,12 @@ function handle(a){
   switch(a.type){
     case 'join': r=Game.join(H,a.cid,a.name,a.role); break;
     case 'leave': r=Game.leave(H,a.cid); break;
-    case 'roll': r=Game.roll(H,seat,rnd); break;
+    case 'roll':{
+      if(H.rolling||H.pending||H.phase!=='playing'||Game.currentSeat(H)!==seat){r={ok:false,err:'지금은 굴릴 수 없어요.'};break}
+      H.rolling={seat,t:Date.now()}; publish();
+      setTimeout(()=>{H.rolling=null;const rr=Game.roll(H,seat,rnd);if(!rr.ok)toast(rr.err);publish()},1500);
+      return;}
+    case 'pass': r=Game.pass(H,seat); break;
     case 'bet': r=Game.bet(H,seat,a.prize); break;
     case 'rps':{
       if(H.phase!=='rps')return;
@@ -281,6 +309,14 @@ function hostKick(i){if(!confirm(`${i+1}번 자리를 비울까요?`))return;H.s
 function hostKickSpec(c){H.spectators=H.spectators.filter(x=>x.cid!==c);publish()}
 
 // ---------- 화면 ----------
+function canActNow(){if(!S||S.phase!=='playing')return false;const cur=S.order[S.turnPos];const me=S.seats.findIndex(p=>p&&p.cid===CID);return cur===me||(isHost&&proxy)}
+function dieClick(){if(!canActNow())return; if(S.pending||S.rolling)return; act({type:'roll'})}
+function pick(z){picked=z;render()}
+function confirmTurn(){if(!canActNow()||!S.pending)return; if(S.pending.burn)return act({type:'pass'}); if(!picked)return toast('베팅할 경품을 먼저 고르세요'); const z=picked;picked=null;act({type:'bet',prize:z})}
+function spin(on){const d=$('die');if(on&&!spinIv){d.classList.add('rolling');spinIv=setInterval(()=>face(1+Math.floor(Math.random()*6)),90)}if(!on&&spinIv){clearInterval(spinIv);spinIv=null;d.classList.remove('rolling')}}
+let prevStack={},nextStack={};
+function stackHtml(i,amt,p){const key=p+i,prev=prevStack[key]??amt;nextStack[key]=amt;
+  return `<div class="stack" style="--c:${COLORS[i]}"><div class="n" style="${i===5?'color:#ccc':''}">${i+1}번</div>${Array.from({length:amt},(_,k)=>`<div class="cchip${k>=prev?' new':''}" style="${k>=prev?`animation-delay:${(k-prev)*60}ms`:''}"></div>`).join('')}<div class="amt">${amt}</div></div>`}
 const PIPS={1:[4],2:[0,8],3:[0,4,8],4:[0,2,6,8],5:[0,2,4,6,8],6:[0,2,3,5,6,8]};
 function face(n){[...$('die').children].forEach((d,i)=>d.style.visibility=(PIPS[n]||[]).includes(i)?'visible':'hidden')}
 function animateDie(n){const d=$('die');d.classList.add('rolling');let k=0;const iv=setInterval(()=>{face(1+Math.floor(Math.random()*6));if(++k>8){clearInterval(iv);d.classList.remove('rolling');face(n)}},80)}
@@ -302,18 +338,28 @@ function render(){
   // 배너
   const b=$('banner');b.classList.remove('me');
   if(S.phase==='lobby') b.textContent=`대기 중 · 참가자 ${pc}/6 · 관전자 ${S.spectators.length}/2 · 진행자 ${esc(S.hostName||'')}`;
-  else if(S.phase==='playing'){ if(cur===mySeat){b.classList.add('me');b.textContent=S.pending?`🎲 ${S.pending.roll}! 베팅할 경품을 고르세요`:'내 차례! 주사위를 굴리세요'} else b.innerHTML=`${lb(cur)} 차례`+(S.pending?` · 🎲${S.pending.roll} 경품 고르는 중`:'') }
+  else if(S.phase==='playing'){ if(cur===mySeat){b.classList.add('me');b.textContent=S.pending?(S.pending.burn?`🎲 ${S.pending.roll}! 칩이 부족해요`:`🎲 ${S.pending.roll}! 경품을 고르고 턴을 넘기세요`):'내 차례! 주사위를 눌러 굴리세요'} else b.innerHTML=`${lb(cur)} 차례`+(S.rolling?' · 🎲 굴리는 중':S.pending?` · 🎲${S.pending.roll} ${S.pending.burn?'칩 부족':'경품 고르는 중'}`:'') }
   else if(S.phase==='rps') b.textContent=`경품 ${S.rps.prize} 가위바위보 ${S.rps.round}회차`;
   else b.textContent='게임 종료! 결과를 확인하세요';
 
   // 주사위
-  if(S.lastRoll&&S.lastRoll.t!==lastRollT){const first=!lastRollT;lastRollT=S.lastRoll.t;first?face(S.lastRoll.roll):animateDie(S.lastRoll.roll)}
-  if(!S.lastRoll) face(0);
+  if(S.rolling){spin(true)}
+  else{spin(false);
+    if(S.lastRoll&&S.lastRoll.t!==lastRollT){const first=!lastRollT;lastRollT=S.lastRoll.t;face(S.lastRoll.roll);if(!first){const d=$('die');d.classList.remove('pop');void d.offsetWidth;d.classList.add('pop')}}
+    else if(S.lastRoll) face(S.lastRoll.roll); else face(0);}
   $('dieInfo').innerHTML=S.lastRoll?`${lb(S.lastRoll.seat)}: ${S.lastRoll.roll}`+(S.lastRoll.burned!=null?` → 칩 부족, ${S.lastRoll.burned}칩 소멸`:''):'';
-  const canAct=S.phase==='playing'&&(cur===mySeat||(isHost&&proxy));
-  $('rollBtn').classList.toggle('hide',!(canAct&&!S.pending));
-  $('rollBtn').textContent=cur===mySeat?'🎲 주사위 굴리기':`🎲 ${S.seats[cur]?.name||''} 대신 굴리기`;
-  $('prizeBtns').classList.toggle('hide',!(canAct&&S.pending));
+  const canAct=canActNow();
+  const key=S.pending?`${S.pending.seat}-${S.lastRoll&&S.lastRoll.t}`:'';if(key!==pickKey){pickKey=key;picked=null}
+  const ready=canAct&&!S.pending&&!S.rolling;
+  $('die').classList.toggle('ready',ready);
+  $('dieHint').textContent=S.rolling?`${S.seats[S.rolling.seat]?.name||''} 주사위 굴리는 중…`:ready?(cur===mySeat?'👆 주사위를 눌러 굴리세요':`👆 ${S.seats[cur]?.name||''} 대신 굴리기`):'';
+  const betting=canAct&&S.pending&&!S.pending.burn;
+  $('prizeBtns').classList.toggle('hide',!betting);
+  ['A','B','C'].forEach(z=>$('pick'+z).classList.toggle('sel',picked===z));
+  const pb=$('passBtn');pb.classList.toggle('hide',!(canAct&&S.pending));
+  if(S.pending&&S.pending.burn) pb.textContent=`칩 부족 (남은 ${S.seats[S.pending.seat].chips}칩 소멸) · 턴 넘기기`;
+  else pb.textContent=picked?`${picked}에 ${S.pending?S.pending.roll:''}칩 베팅하고 턴 넘기기`:'경품을 고른 뒤 턴 넘기기';
+  pb.disabled=!!(S.pending&&!S.pending.burn&&!picked);
 
   // 가위바위보
   const rb=$('rpsBox');
@@ -336,17 +382,22 @@ function render(){
     if(open){const t=S.seats.reduce((a,x)=>a+(x&&x.bets?x.bets[p]:0),0);tot=`총 ${t}칩`}
     const mine=myBets?`<div class="tot">내 베팅 ${myBets[p]}칩</div>`:'';
     const nm=S.revealed&&S.prizeNames[p]?`<div style="font-weight:700">${esc(S.prizeNames[p])}</div>`:'<div class="tot">??? 블라인드</div>';
-    return `<div class="prize ${p}"><div class="big" style="color:var(--${p})">${p}</div>${nm}<div class="tot">${tot}</div>${mine}</div>`}).join('');
+    let st='';
+    if(open){st=S.seats.map((x,i)=>x&&x.bets&&x.bets[p]>0?stackHtml(i,x.bets[p],p):'').join('')}
+    else if(myBets&&myBets[p]>0){st=stackHtml(mySeat,myBets[p],p)+'<div class="emptystack">+ 다른 사람 비공개</div>'}
+    if(!st)st='<div class="emptystack">아직 칩 없음</div>';
+    return `<div class="prize ${p}"><div class="big" style="color:var(--${p})">${p}</div>${nm}<div class="stacks">${st}</div><div class="tot">${tot}</div>${open?'':mine}</div>`}).join('');
+  prevStack=Object.assign({},prevStack,nextStack);nextStack={};
   $('betMode').textContent=S.settings.openBets?'베팅 공개 모드: 모두가 경품별 베팅액을 볼 수 있어요':'베팅 비공개 모드: 내 베팅만 보이고, 다른 사람은 남은 칩만 보여요 (종료 후 전부 공개)';
 
   // 자리
   $('seats').innerHTML=S.seats.map((p,i)=>{
     if(!p) return `<div class="seat empty"><div class="nm">${i+1}번 · 빈 자리</div></div>`;
-    const chips=Array.from({length:15},(_,k)=>`<div class="chip ${k<p.chips?'':'off'}"></div>`).join('');
+    const chips=Array.from({length:15},(_,k)=>`<div class="chip ${k<p.chips?'':'off'}" style="--c:${COLORS[i]}"></div>`).join('');
     const bets=p.bets?`<div class="bets">${['A','B','C'].map(z=>`<span style="color:var(--${z})">${z} ${p.bets[z]}</span>`).join('')}</div>`:'';
     const me=p.cid===CID?'<span class="tag">나</span>':'';
     const kick=isHost&&S.phase==='lobby'?` <button class="ghost small" onclick="hostKick(${i})">비우기</button>`:'';
-    return `<div class="seat ${i===cur?'turn':''}"><div class="nm"><span class="dot ${online[p.cid]?'on':''}"></span>${i+1}번 ${esc(p.name)}${me}${kick}</div><div class="chips">${chips}</div><div class="mute">남은 칩 ${p.chips}개</div>${bets}</div>`}).join('');
+    return `<div class="seat ${i===cur?'turn':''}"><div class="nm"><span class="dot ${online[p.cid]?'on':''}"></span><span class="pcol" style="--c:${COLORS[i]}"></span>${i+1}번 ${esc(p.name)}${me}${kick}</div><div class="chips">${chips}</div><div class="mute">남은 칩 ${p.chips}개</div>${bets}</div>`}).join('');
   $('specs').innerHTML='관전자: '+(S.spectators.map(x=>`<span class="dot ${online[x.cid]?'on':''}"></span>${esc(x.name)}${x.cid===CID?' (나)':''}${isHost?` <button class="ghost small" onclick="hostKickSpec('${x.cid}')">내보내기</button>`:''}`).join(' · ')||'없음')+` (${S.spectators.length}/2)`;
 
   // 기록

@@ -87,20 +87,29 @@
     if (s.pending) return { ok: false, err: '이미 주사위를 굴렸습니다.' };
     const p = s.seats[seat];
     const r = 1 + Math.floor(rnd() * 6);
-    if (p.chips < r) {
-      addLog(s, `${label(s, seat)}: 🎲${r} → 남은 ${p.chips}칩 부족, 전부 소멸`);
-      const burned = p.chips; p.chips = 0;
-      s.lastRoll = { seat, roll: r, burned, t: Date.now() };
-      advance(s);
-      return { ok: true, roll: r, burned };
+    if (p.chips < r) { // 칩 부족: 결과를 모두 확인한 뒤 '턴 넘기기'로 소멸 처리
+      s.pending = { seat, roll: r, burn: true };
+      s.lastRoll = { seat, roll: r, t: Date.now() };
+      return { ok: true, roll: r, burn: true };
     }
     s.pending = { seat, roll: r };
     s.lastRoll = { seat, roll: r, t: Date.now() };
     return { ok: true, roll: r };
   }
 
+  function pass(s, seat) {
+    if (s.phase !== 'playing' || !s.pending || s.pending.seat !== seat || !s.pending.burn) return { ok: false, err: '지금은 넘길 수 없어요.' };
+    const p = s.seats[seat], r = s.pending.roll;
+    addLog(s, `${label(s, seat)}: 🎲${r} → 남은 ${p.chips}칩 부족, 전부 소멸`);
+    s.lastRoll = { seat, roll: r, burned: p.chips, t: s.lastRoll ? s.lastRoll.t : Date.now() };
+    p.chips = 0;
+    advance(s);
+    return { ok: true };
+  }
+
   function bet(s, seat, prize) {
     if (s.phase !== 'playing' || !s.pending || s.pending.seat !== seat) return { ok: false, err: '먼저 주사위를 굴리세요.' };
+    if (s.pending.burn) return { ok: false, err: '칩이 부족해 베팅할 수 없어요.' };
     if (!PRIZES.includes(prize)) return { ok: false, err: '경품 선택 오류' };
     const p = s.seats[seat], r = s.pending.roll;
     p.chips -= r; p.bets[prize] += r;
@@ -186,6 +195,6 @@
     return c;
   }
 
-  const api = { PRIZES, MAX_PLAYERS, MAX_SPECTATORS, START_CHIPS, newState, join, leave, start, roll, bet, judgePrize, resolveRps, reset, redact, currentSeat, seatOf, playerCount, label, KR };
+  const api = { PRIZES, MAX_PLAYERS, MAX_SPECTATORS, START_CHIPS, newState, join, leave, start, roll, bet, pass, judgePrize, resolveRps, reset, redact, currentSeat, seatOf, playerCount, label, KR };
   if (typeof module !== 'undefined') module.exports = api; else root.Game = api;
 })(this);
