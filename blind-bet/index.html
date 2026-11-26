@@ -262,7 +262,7 @@ function joinByCode(){const c=$('codeIn').value.trim().toUpperCase();if(!c)retur
 
 function connect(tryOthers){
   $('roomBox').classList.remove('hide');$('roomCode').textContent=ROOM;
-  base=`hark-bbg/v1/${ROOM}`;
+  base=`hark-bbg/v2/${ROOM}`;
   const url=qs.get('broker')||BROKERS[BIDX]||BROKERS[0];
   client=mqtt.connect(url,{clientId:'bbg_'+CID+'_'+Math.random().toString(36).slice(2,6),keepalive:30,reconnectPeriod:2000,connectTimeout:8000,clean:true});
   let ok=false;
