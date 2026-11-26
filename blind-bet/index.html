@@ -82,13 +82,19 @@ button.die.ready{box-shadow:0 6px 0 #c9c2ad,0 0 0 6px var(--gold),0 0 30px var(-
 table{width:100%;border-collapse:collapse;font-size:14px}
 td,th{padding:5px;border-bottom:1px solid var(--line);text-align:center}
 details summary{cursor:pointer;color:var(--mute)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
+.modal .box{background:var(--card);border:1px solid var(--gold);border-radius:16px;max-width:440px;width:100%;max-height:88vh;overflow:auto;padding:18px 18px 14px}
+.modal h2{margin:0 0 10px;font-size:19px}
+.modal ol{margin:0;padding-left:20px;line-height:1.65;font-size:15px}
+.modal li{margin-bottom:6px}
+.modal b{color:var(--gold)}
 .hide{display:none!important}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="top">
-    <div><h1>🎲 블라인드 경품 베팅</h1><div class="sub">참가자 6명 · 관전자 2명 · 1인 15칩</div></div>
+    <div><h1>🎲 블라인드 경품 베팅</h1><div class="sub">참가자 6명 · 관전자 2명 · 1인 15칩 <button class="ghost small" style="margin-left:6px" onclick="showRules()">룰 보기</button></div></div>
     <div id="roomBox" class="hide" style="text-align:right">
       <div class="code" id="roomCode"></div>
       <button class="ghost small" style="margin-top:6px" onclick="copyLink()">초대 링크 복사</button>
@@ -174,6 +180,19 @@ details summary{cursor:pointer;color:var(--mute)}
   </div>
 </div>
 <div class="toast" id="toast"></div>
+<div id="rules" class="modal hide" onclick="if(event.target===this)hideRules()"><div class="box">
+  <h2>🎲 게임 룰 (30초 요약)</h2>
+  <ol>
+    <li>각자 <b>칩 15개</b>로 시작. 경품 <b>A·B·C</b>는 내용 비공개(끝나고 공개).</li>
+    <li>내 차례에 <b>주사위를 눌러</b> 굴리고, 나온 숫자만큼 칩을 <b>A·B·C 중 한 곳</b>에 베팅 → <b>턴 넘기기</b>.</li>
+    <li>같은 경품에 여러 번 걸면 <b>합산</b>. 쓴 칩은 사라져요.</li>
+    <li>남은 칩이 주사위 숫자보다 적으면 베팅 못 하고 <b>남은 칩 전부 소멸</b>.</li>
+    <li>모두 칩을 다 쓰면 경품별로 판정: 다른 사람과 <b>금액이 같으면 둘 다 무효</b>, 남은 금액 중 <b>최고액이 당첨</b>.</li>
+    <li>전부 중복이면 <b>최고 중복액끼리 가위바위보</b>. 아무도 안 건 경품은 주인 없음. 여러 개 당첨도 OK.</li>
+  </ol>
+  <p class="mute" style="margin:10px 0">핵심: 많이 거는 것보다 <b>남과 안 겹치게</b> 거는 게 중요해요!</p>
+  <button style="width:100%" onclick="hideRules()">알겠어요, 시작!</button>
+</div></div>
 
 <script src="mqtt.min.js"></script>
 <script src="logic.js"></script>
@@ -195,7 +214,10 @@ function link(){return `${location.origin}${location.pathname}?room=${ROOM}&b=${
 function copyLink(){const l=link();(navigator.clipboard?navigator.clipboard.writeText(l):Promise.reject()).then(()=>toast('초대 링크를 복사했어요')).catch(()=>prompt('링크를 복사하세요',l))}
 
 // ---------- 시작 ----------
+function showRules(){$('rules').classList.remove('hide')}
+function hideRules(){$('rules').classList.add('hide');localStorage.setItem('bbg-rules-seen','1')}
 function boot(){
+  if(!localStorage.getItem('bbg-rules-seen'))showRules();
   $('nameIn0').value=NAME;$('nameIn').value=NAME;
   if(!ROOM){$('landing').classList.remove('hide');$('conn').classList.add('hide');return}
   const saved=localStorage.getItem('bbg-host-'+ROOM);
